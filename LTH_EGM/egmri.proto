@@ -1,0 +1,198 @@
+//======================================================================================================
+//
+// Definition of ABB Externally Guided Motion Research Interface (EGMRI) V1.0.
+//
+// Messages of type EgmriRobot are sent out from the robot controller.
+// Messages of type EgmriSensor are sent to the robot controller.
+//
+//======================================================================================================
+package abb.egmri;
+
+
+
+
+//======================================================================================================
+// Auxiliary components
+//======================================================================================================
+
+//---------------------------------------------------
+// Header component
+//---------------------------------------------------
+
+message EgmriHeader
+{ 
+    optional uint32 seqno = 1; // Sequence number (to be able to find lost messages)
+    optional uint32 tm    = 2; // Timestamp in ms
+
+    enum MessageType {
+        MSGTYPE_UNDEFINED  = 0;
+        MSGTYPE_COMMAND    = 1; // For future use
+        MSGTYPE_DATA       = 2; // Sent by robot controller
+        MSGTYPE_CORRECTION = 3; // Sent by sensor
+    }
+
+    optional MessageType mtype = 3 [default = MSGTYPE_UNDEFINED];
+}
+
+
+//---------------------------------------------------
+// Basic Cartesian space components
+//---------------------------------------------------
+
+// Cartesian position
+message EgmriCartesian
+{
+    required float x = 1;
+    required float y = 2;
+    required float z = 3;
+}
+
+// Quaternion orientation
+message EgmriQuaternion
+{
+    required float u0 = 1;
+    required float u1 = 2;
+    required float u2 = 3;
+    required float u3 = 4;
+}
+
+// Pose (i.e. Cartesian position and Quaternion orientation)
+message EgmriPose
+{ 
+    optional EgmriCartesian  position    = 1; // Units: mm
+    optional EgmriQuaternion orientation = 2;
+} 
+
+
+//---------------------------------------------------
+// Basic joint space components
+//---------------------------------------------------
+
+// Array of 6 joint values
+message EgmriJoints
+{
+    repeated float joints = 1;
+}
+
+// Joint space component
+message EgmriJointSpace
+{
+    optional EgmriJoints joints         = 1; // Array of 6 joint values for TCP robot
+    optional EgmriJoints externalJoints = 2; // Array of 6 joint values for additional axis
+}
+
+
+//---------------------------------------------------
+// Composite components
+//---------------------------------------------------
+
+// Robot feedback values
+message EgmriFeedback
+{
+    // Cartesian space feedback data for TCP pose, i.e. actual measurements for robot's TCP
+    optional EgmriPose cartesianPose = 1;
+
+    // Joint space feedback data for position, speed and torque, i.e. actual measurements for robot (joints) and additional axis (externalJoints)
+    optional EgmriJointSpace jointPosition = 2; // Units: rad
+    optional EgmriJointSpace jointSpeed    = 3; // Units: rad/s
+    optional EgmriJointSpace jointTorque   = 4; // Units: Nm
+}
+
+// Robot planned values
+message EgmriPlanned
+{
+    // Cartesian space planned data for TCP pose
+    optional EgmriPose       cartesianPose = 1;
+
+    // Joint space planned data for position and speed, for robot (joints) and additional axis (externalJoints)
+    optional EgmriJointSpace jointPosition = 2; // Units: rad
+    optional EgmriJointSpace jointSpeed    = 3; // Units: rad/s
+}
+
+// Servocontroller PID parameters for a P-PI cascade controller, for robot (joints) and additional axis (externalJoints)
+message EgmriPIDParameters
+{
+    optional EgmriJointSpace kp = 1; // Position control propotional gain
+    optional EgmriJointSpace kv = 2; // Speed control propotional gain
+    optional EgmriJointSpace ki = 3; // Speed control integration gain
+}
+
+
+//---------------------------------------------------
+// Additonal components
+//---------------------------------------------------
+
+// Motor state
+message EgmriMotorState
+{
+    enum MotorStateType {
+        MOTORS_UNDEFINED = 0;
+        MOTORS_ON        = 1;
+        MOTORS_OFF       = 2;
+    }
+
+    required MotorStateType state = 1;
+}
+
+// MCI (Motion Correction Interface, internal component of EGMRI) state
+message EgmriMCIState
+{
+    enum MCIStateType {
+        MCI_UNDEFINED = 0;
+        MCI_ERROR     = 1;
+        MCI_STOPPED   = 2;
+        MCI_RUNNING   = 3;
+    }
+
+    required MCIStateType state = 1 [default = MCI_UNDEFINED];
+}
+
+// RAPID execution state
+message EgmriRapidCtrlExecState
+{
+    enum RapidCtrlExecStateType {
+        RAPID_UNDEFINED = 0;
+        RAPID_STOPPED   = 1;
+        RAPID_RUNNING   = 2;
+    };
+
+    required RapidCtrlExecStateType state = 1  [default = RAPID_UNDEFINED];
+}
+
+// Test signals, for future use 
+message EgmriTestSignals
+{
+    repeated float signals = 1;
+}
+
+
+
+
+//======================================================================================================
+// Primary components
+//======================================================================================================
+
+// Robot controller outbound message, sent to sensor
+message EgmriRobot
+{
+    optional EgmriHeader             header            = 1;
+    optional EgmriFeedback           feedback          = 2;
+    optional EgmriPlanned            planned           = 3;
+    optional EgmriPIDParameters      pidParameters     = 4;
+
+    optional EgmriMotorState         motorState        = 5;
+    optional EgmriMCIState           mciState          = 6;
+    optional bool                    mciConvergenceMet = 7;
+    optional EgmriTestSignals        testSignals       = 8;
+    optional EgmriRapidCtrlExecState rapidExecState    = 9; 
+}
+
+// Robot controller inbound message, sent from sensor
+message EgmriSensor
+{
+    optional EgmriHeader        header             = 1;
+    optional EgmriJointSpace    positionReferences = 2; // Units: deg
+    optional EgmriJointSpace    speedReferences    = 3; // Units: deg/s
+    optional EgmriJointSpace    torqueFeedforward  = 4; // Units: Nm
+    optional EgmriPIDParameters pidParameters      = 5;
+}
