@@ -1,6 +1,6 @@
 // Definition of the communication protocol between EGM_Sensor_controller and EGM_Sensor_Server
 // -Gregory Austin
-package lth.interface.egm;
+package lth.egm;
 
 message Header
 { 

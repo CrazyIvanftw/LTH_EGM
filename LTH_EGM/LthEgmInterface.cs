@@ -6,7 +6,7 @@ using pb = global::Google.ProtocolBuffers;
 using pbc = global::Google.ProtocolBuffers.Collections;
 using pbd = global::Google.ProtocolBuffers.Descriptors;
 using scg = global::System.Collections.Generic;
-namespace lth.interface.egm {
+namespace lth.egm {
   
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
   public static partial class LthEgmInterface {
@@ -16,18 +16,18 @@ namespace lth.interface.egm {
     }
     #endregion
     #region Static variables
-    internal static pbd::MessageDescriptor internal__static_lth_interface_egm_Header__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::lth.interface.egm.Header, global::lth.interface.egm.Header.Builder> internal__static_lth_interface_egm_Header__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_lth_interface_egm_Position_Values__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::lth.interface.egm.Position_Values, global::lth.interface.egm.Position_Values.Builder> internal__static_lth_interface_egm_Position_Values__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_lth_interface_egm_Joints__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::lth.interface.egm.Joints, global::lth.interface.egm.Joints.Builder> internal__static_lth_interface_egm_Joints__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_lth_interface_egm_Time__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::lth.interface.egm.Time, global::lth.interface.egm.Time.Builder> internal__static_lth_interface_egm_Time__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_lth_interface_egm_Feedback_Values__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::lth.interface.egm.Feedback_Values, global::lth.interface.egm.Feedback_Values.Builder> internal__static_lth_interface_egm_Feedback_Values__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_lth_interface_egm_EGM_Control__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::lth.interface.egm.EGM_Control, global::lth.interface.egm.EGM_Control.Builder> internal__static_lth_interface_egm_EGM_Control__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_lth_egm_Header__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::lth.egm.Header, global::lth.egm.Header.Builder> internal__static_lth_egm_Header__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_lth_egm_Position_Values__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::lth.egm.Position_Values, global::lth.egm.Position_Values.Builder> internal__static_lth_egm_Position_Values__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_lth_egm_Joints__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::lth.egm.Joints, global::lth.egm.Joints.Builder> internal__static_lth_egm_Joints__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_lth_egm_Time__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::lth.egm.Time, global::lth.egm.Time.Builder> internal__static_lth_egm_Time__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_lth_egm_Feedback_Values__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::lth.egm.Feedback_Values, global::lth.egm.Feedback_Values.Builder> internal__static_lth_egm_Feedback_Values__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_lth_egm_EGM_Control__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::lth.egm.EGM_Control, global::lth.egm.EGM_Control.Builder> internal__static_lth_egm_EGM_Control__FieldAccessorTable;
     #endregion
     #region Descriptor
     public static pbd::FileDescriptor Descriptor {
@@ -38,73 +38,70 @@ namespace lth.interface.egm {
     static LthEgmInterface() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChdsdGhfZWdtX2ludGVyZmFjZS5wcm90bxIRbHRoLmludGVyZmFjZS5lZ20i", 
-            "owQKBkhlYWRlchINCgVzZXFubxgBIAEoDRIKCgJ0bRgCIAEoDRJHCgVtdHlw", 
-            "ZRgDIAEoDjIlLmx0aC5pbnRlcmZhY2UuZWdtLkhlYWRlci5NZXNzYWdlVHlw", 
-            "ZToRTVNHVFlQRV9VTkRFRklORUQSRgoEbW9kZRgEIAEoDjIiLmx0aC5pbnRl", 
-            "cmZhY2UuZWdtLkhlYWRlci5FR01fTW9kZToUTU9ERV9QT1NJVElPTl9TVFJF", 
-            "QU0ikAIKC01lc3NhZ2VUeXBlEhUKEU1TR1RZUEVfVU5ERUZJTkVEEAASFwoT", 
-            "TVNHVFlQRV9QT1NfQ09NTUFORBABEhMKD01TR1RZUEVfUE9TX0FDSxACEh4K", 
-            "Gk1TR1RZUEVfUkVRVUVTVF9QT1NfVkFMVUVTEAMSGgoWTVNHVFlQRV9BQ0tf", 
-            "UE9TX1ZBTFVFUxAEEiMKH01TR1RZUEVfUkVRVUVTVF9GRUVEQkFDS19WQUxV", 
-            "RVMQBRIfChtNU0dUWVBFX0FDS19GRUVEQkFDS19WQUxVRVMQBhIeChpNU0dU", 
-            "WVBFX1JFUVVFU1RfQUxMX1ZBTFVFUxAHEhoKFk1TR1RZUEVfQUNLX0FMTF9W", 
-            "QUxVRVMQCCJaCghFR01fTW9kZRIYChRNT0RFX1BPU0lUSU9OX1NUUkVBTRAA", 
-            "EhoKFk1PREVfUE9TSVRJT05fR1VJREFOQ0UQARIYChRNT0RFX1BBVEhfQ09S", 
-            "UkVDVElPThACIusCCg9Qb3NpdGlvbl9WYWx1ZXMSEwoLY2FydGVzaWFuX3gY", 
-            "ASABKAESEwoLY2FydGVzaWFuX3kYAiABKAESEwoLY2FydGVzaWFuX3oYAyAB", 
-            "KAESFQoNcXVhcnRlcm5pb25fMBgEIAEoARIVCg1xdWFydGVybmlvbl8xGAUg", 
-            "ASgBEhUKDXF1YXJ0ZXJuaW9uXzIYBiABKAESFQoNcXVhcnRlcm5pb25fMxgH", 
-            "IAEoARIPCgdldWxlcl94GAggASgBEg8KB2V1bGVyX3kYCSABKAESDwoHZXVs", 
-            "ZXJfehgKIAEoARIvCgxyb2JvdF9qb2ludHMYCyABKAsyGS5sdGguaW50ZXJm", 
-            "YWNlLmVnbS5Kb2ludHMSMgoPZXh0ZXJuYWxfam9pbnRzGAwgASgLMhkubHRo", 
-            "LmludGVyZmFjZS5lZ20uSm9pbnRzEiUKBHRpbWUYDSABKAsyFy5sdGguaW50", 
-            "ZXJmYWNlLmVnbS5UaW1lIhgKBkpvaW50cxIOCgZqb2ludHMYASADKAEiIQoE", 
-            "VGltZRILCgNzZWMYASACKAQSDAoEdXNlYxgCIAIoBCKlBAoPRmVlZGJhY2tf", 
-            "VmFsdWVzEkUKCm1vdG9yU3RhdGUYASABKA4yMS5sdGguaW50ZXJmYWNlLmVn", 
-            "bS5GZWVkYmFja19WYWx1ZXMuTW90b3JTdGF0ZVR5cGUSQQoIbWNpU3RhdGUY", 
-            "AiABKA4yLy5sdGguaW50ZXJmYWNlLmVnbS5GZWVkYmFja19WYWx1ZXMuTUNJ", 
-            "U3RhdGVUeXBlEhkKEW1jaUNvbnZlcmdlbmNlTWV0GAMgASgIElEKDnJhcGlk", 
-            "RXhjZVN0YXRlGAQgASgOMjkubHRoLmludGVyZmFjZS5lZ20uRmVlZGJhY2tf", 
+            "ChdsdGhfZWdtX2ludGVyZmFjZS5wcm90bxIHbHRoLmVnbSKPBAoGSGVhZGVy", 
+            "Eg0KBXNlcW5vGAEgASgNEgoKAnRtGAIgASgNEj0KBW10eXBlGAMgASgOMhsu", 
+            "bHRoLmVnbS5IZWFkZXIuTWVzc2FnZVR5cGU6EU1TR1RZUEVfVU5ERUZJTkVE", 
+            "EjwKBG1vZGUYBCABKA4yGC5sdGguZWdtLkhlYWRlci5FR01fTW9kZToUTU9E", 
+            "RV9QT1NJVElPTl9TVFJFQU0ikAIKC01lc3NhZ2VUeXBlEhUKEU1TR1RZUEVf", 
+            "VU5ERUZJTkVEEAASFwoTTVNHVFlQRV9QT1NfQ09NTUFORBABEhMKD01TR1RZ", 
+            "UEVfUE9TX0FDSxACEh4KGk1TR1RZUEVfUkVRVUVTVF9QT1NfVkFMVUVTEAMS", 
+            "GgoWTVNHVFlQRV9BQ0tfUE9TX1ZBTFVFUxAEEiMKH01TR1RZUEVfUkVRVUVT", 
+            "VF9GRUVEQkFDS19WQUxVRVMQBRIfChtNU0dUWVBFX0FDS19GRUVEQkFDS19W", 
+            "QUxVRVMQBhIeChpNU0dUWVBFX1JFUVVFU1RfQUxMX1ZBTFVFUxAHEhoKFk1T", 
+            "R1RZUEVfQUNLX0FMTF9WQUxVRVMQCCJaCghFR01fTW9kZRIYChRNT0RFX1BP", 
+            "U0lUSU9OX1NUUkVBTRAAEhoKFk1PREVfUE9TSVRJT05fR1VJREFOQ0UQARIY", 
+            "ChRNT0RFX1BBVEhfQ09SUkVDVElPThACIs0CCg9Qb3NpdGlvbl9WYWx1ZXMS", 
+            "EwoLY2FydGVzaWFuX3gYASABKAESEwoLY2FydGVzaWFuX3kYAiABKAESEwoL", 
+            "Y2FydGVzaWFuX3oYAyABKAESFQoNcXVhcnRlcm5pb25fMBgEIAEoARIVCg1x", 
+            "dWFydGVybmlvbl8xGAUgASgBEhUKDXF1YXJ0ZXJuaW9uXzIYBiABKAESFQoN", 
+            "cXVhcnRlcm5pb25fMxgHIAEoARIPCgdldWxlcl94GAggASgBEg8KB2V1bGVy", 
+            "X3kYCSABKAESDwoHZXVsZXJfehgKIAEoARIlCgxyb2JvdF9qb2ludHMYCyAB", 
+            "KAsyDy5sdGguZWdtLkpvaW50cxIoCg9leHRlcm5hbF9qb2ludHMYDCABKAsy", 
+            "Dy5sdGguZWdtLkpvaW50cxIbCgR0aW1lGA0gASgLMg0ubHRoLmVnbS5UaW1l", 
+            "IhgKBkpvaW50cxIOCgZqb2ludHMYASADKAEiIQoEVGltZRILCgNzZWMYASAC", 
+            "KAQSDAoEdXNlYxgCIAIoBCKHBAoPRmVlZGJhY2tfVmFsdWVzEjsKCm1vdG9y", 
+            "U3RhdGUYASABKA4yJy5sdGguZWdtLkZlZWRiYWNrX1ZhbHVlcy5Nb3RvclN0", 
+            "YXRlVHlwZRI3CghtY2lTdGF0ZRgCIAEoDjIlLmx0aC5lZ20uRmVlZGJhY2tf", 
+            "VmFsdWVzLk1DSVN0YXRlVHlwZRIZChFtY2lDb252ZXJnZW5jZU1ldBgDIAEo", 
+            "CBJHCg5yYXBpZEV4Y2VTdGF0ZRgEIAEoDjIvLmx0aC5lZ20uRmVlZGJhY2tf", 
             "VmFsdWVzLlJhcGlkQ3RybEV4ZWNTdGF0ZVR5cGUSEwoLdGVzdFNpZ25hbHMY", 
             "BSADKAESFQoNbWVhc3VyZWRGb3JjZRgGIAMoASJFCg5Nb3RvclN0YXRlVHlw", 
             "ZRIUChBNT1RPUlNfVU5ERUZJTkVEEAASDQoJTU9UT1JTX09OEAESDgoKTU9U", 
             "T1JTX09GRhACIlIKDE1DSVN0YXRlVHlwZRIRCg1NQ0lfVU5ERUZJTkVEEAAS", 
             "DQoJTUNJX0VSUk9SEAESDwoLTUNJX1NUT1BQRUQQAhIPCgtNQ0lfUlVOTklO", 
             "RxADIlMKFlJhcGlkQ3RybEV4ZWNTdGF0ZVR5cGUSEwoPUkFQSURfVU5ERUZJ", 
-            "TkVEEAASEQoNUkFQSURfU1RPUFBFRBABEhEKDVJBUElEX1JVTk5JTkcQAiKl", 
-            "AgoLRUdNX0NvbnRyb2wSKQoGaGVhZGVyGAEgAigLMhkubHRoLmludGVyZmFj", 
-            "ZS5lZ20uSGVhZGVyEjsKD2Rlc2lyZWRQb3NpdGlvbhgCIAEoCzIiLmx0aC5p", 
-            "bnRlcmZhY2UuZWdtLlBvc2l0aW9uX1ZhbHVlcxI7Cg9jdXJyZW50UG9zaXRp", 
-            "b24YAyABKAsyIi5sdGguaW50ZXJmYWNlLmVnbS5Qb3NpdGlvbl9WYWx1ZXMS", 
-            "OwoPcGxhbm5lZFBvc2l0aW9uGAQgASgLMiIubHRoLmludGVyZmFjZS5lZ20u", 
-            "UG9zaXRpb25fVmFsdWVzEjQKCGZlZWRiYWNrGAUgASgLMiIubHRoLmludGVy", 
-          "ZmFjZS5lZ20uRmVlZGJhY2tfVmFsdWVz"));
+            "TkVEEAASEQoNUkFQSURfU1RPUFBFRBABEhEKDVJBUElEX1JVTk5JTkcQAiLz", 
+            "AQoLRUdNX0NvbnRyb2wSHwoGaGVhZGVyGAEgAigLMg8ubHRoLmVnbS5IZWFk", 
+            "ZXISMQoPZGVzaXJlZFBvc2l0aW9uGAIgASgLMhgubHRoLmVnbS5Qb3NpdGlv", 
+            "bl9WYWx1ZXMSMQoPY3VycmVudFBvc2l0aW9uGAMgASgLMhgubHRoLmVnbS5Q", 
+            "b3NpdGlvbl9WYWx1ZXMSMQoPcGxhbm5lZFBvc2l0aW9uGAQgASgLMhgubHRo", 
+            "LmVnbS5Qb3NpdGlvbl9WYWx1ZXMSKgoIZmVlZGJhY2sYBSABKAsyGC5sdGgu", 
+          "ZWdtLkZlZWRiYWNrX1ZhbHVlcw=="));
       pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
         descriptor = root;
-        internal__static_lth_interface_egm_Header__Descriptor = Descriptor.MessageTypes[0];
-        internal__static_lth_interface_egm_Header__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::lth.interface.egm.Header, global::lth.interface.egm.Header.Builder>(internal__static_lth_interface_egm_Header__Descriptor,
+        internal__static_lth_egm_Header__Descriptor = Descriptor.MessageTypes[0];
+        internal__static_lth_egm_Header__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::lth.egm.Header, global::lth.egm.Header.Builder>(internal__static_lth_egm_Header__Descriptor,
                 new string[] { "Seqno", "Tm", "Mtype", "Mode", });
-        internal__static_lth_interface_egm_Position_Values__Descriptor = Descriptor.MessageTypes[1];
-        internal__static_lth_interface_egm_Position_Values__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::lth.interface.egm.Position_Values, global::lth.interface.egm.Position_Values.Builder>(internal__static_lth_interface_egm_Position_Values__Descriptor,
+        internal__static_lth_egm_Position_Values__Descriptor = Descriptor.MessageTypes[1];
+        internal__static_lth_egm_Position_Values__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::lth.egm.Position_Values, global::lth.egm.Position_Values.Builder>(internal__static_lth_egm_Position_Values__Descriptor,
                 new string[] { "CartesianX", "CartesianY", "CartesianZ", "Quarternion0", "Quarternion1", "Quarternion2", "Quarternion3", "EulerX", "EulerY", "EulerZ", "RobotJoints", "ExternalJoints", "Time", });
-        internal__static_lth_interface_egm_Joints__Descriptor = Descriptor.MessageTypes[2];
-        internal__static_lth_interface_egm_Joints__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::lth.interface.egm.Joints, global::lth.interface.egm.Joints.Builder>(internal__static_lth_interface_egm_Joints__Descriptor,
+        internal__static_lth_egm_Joints__Descriptor = Descriptor.MessageTypes[2];
+        internal__static_lth_egm_Joints__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::lth.egm.Joints, global::lth.egm.Joints.Builder>(internal__static_lth_egm_Joints__Descriptor,
                 new string[] { "Joints_", });
-        internal__static_lth_interface_egm_Time__Descriptor = Descriptor.MessageTypes[3];
-        internal__static_lth_interface_egm_Time__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::lth.interface.egm.Time, global::lth.interface.egm.Time.Builder>(internal__static_lth_interface_egm_Time__Descriptor,
+        internal__static_lth_egm_Time__Descriptor = Descriptor.MessageTypes[3];
+        internal__static_lth_egm_Time__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::lth.egm.Time, global::lth.egm.Time.Builder>(internal__static_lth_egm_Time__Descriptor,
                 new string[] { "Sec", "Usec", });
-        internal__static_lth_interface_egm_Feedback_Values__Descriptor = Descriptor.MessageTypes[4];
-        internal__static_lth_interface_egm_Feedback_Values__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::lth.interface.egm.Feedback_Values, global::lth.interface.egm.Feedback_Values.Builder>(internal__static_lth_interface_egm_Feedback_Values__Descriptor,
+        internal__static_lth_egm_Feedback_Values__Descriptor = Descriptor.MessageTypes[4];
+        internal__static_lth_egm_Feedback_Values__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::lth.egm.Feedback_Values, global::lth.egm.Feedback_Values.Builder>(internal__static_lth_egm_Feedback_Values__Descriptor,
                 new string[] { "MotorState", "MciState", "MciConvergenceMet", "RapidExceState", "TestSignals", "MeasuredForce", });
-        internal__static_lth_interface_egm_EGM_Control__Descriptor = Descriptor.MessageTypes[5];
-        internal__static_lth_interface_egm_EGM_Control__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::lth.interface.egm.EGM_Control, global::lth.interface.egm.EGM_Control.Builder>(internal__static_lth_interface_egm_EGM_Control__Descriptor,
+        internal__static_lth_egm_EGM_Control__Descriptor = Descriptor.MessageTypes[5];
+        internal__static_lth_egm_EGM_Control__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::lth.egm.EGM_Control, global::lth.egm.EGM_Control.Builder>(internal__static_lth_egm_EGM_Control__Descriptor,
                 new string[] { "Header", "DesiredPosition", "CurrentPosition", "PlannedPosition", "Feedback", });
         return null;
       };
@@ -135,11 +132,11 @@ namespace lth.interface.egm {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::lth.interface.egm.LthEgmInterface.internal__static_lth_interface_egm_Header__Descriptor; }
+      get { return global::lth.egm.LthEgmInterface.internal__static_lth_egm_Header__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<Header, Header.Builder> InternalFieldAccessors {
-      get { return global::lth.interface.egm.LthEgmInterface.internal__static_lth_interface_egm_Header__FieldAccessorTable; }
+      get { return global::lth.egm.LthEgmInterface.internal__static_lth_egm_Header__FieldAccessorTable; }
     }
     
     #region Nested types
@@ -190,21 +187,21 @@ namespace lth.interface.egm {
     
     public const int MtypeFieldNumber = 3;
     private bool hasMtype;
-    private global::lth.interface.egm.Header.Types.MessageType mtype_ = global::lth.interface.egm.Header.Types.MessageType.MSGTYPE_UNDEFINED;
+    private global::lth.egm.Header.Types.MessageType mtype_ = global::lth.egm.Header.Types.MessageType.MSGTYPE_UNDEFINED;
     public bool HasMtype {
       get { return hasMtype; }
     }
-    public global::lth.interface.egm.Header.Types.MessageType Mtype {
+    public global::lth.egm.Header.Types.MessageType Mtype {
       get { return mtype_; }
     }
     
     public const int ModeFieldNumber = 4;
     private bool hasMode;
-    private global::lth.interface.egm.Header.Types.EGM_Mode mode_ = global::lth.interface.egm.Header.Types.EGM_Mode.MODE_POSITION_STREAM;
+    private global::lth.egm.Header.Types.EGM_Mode mode_ = global::lth.egm.Header.Types.EGM_Mode.MODE_POSITION_STREAM;
     public bool HasMode {
       get { return hasMode; }
     }
-    public global::lth.interface.egm.Header.Types.EGM_Mode Mode {
+    public global::lth.egm.Header.Types.EGM_Mode Mode {
       get { return mode_; }
     }
     
@@ -353,11 +350,11 @@ namespace lth.interface.egm {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::lth.interface.egm.Header.Descriptor; }
+        get { return global::lth.egm.Header.Descriptor; }
       }
       
       public override Header DefaultInstanceForType {
-        get { return global::lth.interface.egm.Header.DefaultInstance; }
+        get { return global::lth.egm.Header.DefaultInstance; }
       }
       
       public override Header BuildPartial() {
@@ -378,7 +375,7 @@ namespace lth.interface.egm {
       }
       
       public override Builder MergeFrom(Header other) {
-        if (other == global::lth.interface.egm.Header.DefaultInstance) return this;
+        if (other == global::lth.egm.Header.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasSeqno) {
           Seqno = other.Seqno;
@@ -524,11 +521,11 @@ namespace lth.interface.egm {
       public bool HasMtype {
        get { return result.hasMtype; }
       }
-      public global::lth.interface.egm.Header.Types.MessageType Mtype {
+      public global::lth.egm.Header.Types.MessageType Mtype {
         get { return result.Mtype; }
         set { SetMtype(value); }
       }
-      public Builder SetMtype(global::lth.interface.egm.Header.Types.MessageType value) {
+      public Builder SetMtype(global::lth.egm.Header.Types.MessageType value) {
         PrepareBuilder();
         result.hasMtype = true;
         result.mtype_ = value;
@@ -537,18 +534,18 @@ namespace lth.interface.egm {
       public Builder ClearMtype() {
         PrepareBuilder();
         result.hasMtype = false;
-        result.mtype_ = global::lth.interface.egm.Header.Types.MessageType.MSGTYPE_UNDEFINED;
+        result.mtype_ = global::lth.egm.Header.Types.MessageType.MSGTYPE_UNDEFINED;
         return this;
       }
       
       public bool HasMode {
        get { return result.hasMode; }
       }
-      public global::lth.interface.egm.Header.Types.EGM_Mode Mode {
+      public global::lth.egm.Header.Types.EGM_Mode Mode {
         get { return result.Mode; }
         set { SetMode(value); }
       }
-      public Builder SetMode(global::lth.interface.egm.Header.Types.EGM_Mode value) {
+      public Builder SetMode(global::lth.egm.Header.Types.EGM_Mode value) {
         PrepareBuilder();
         result.hasMode = true;
         result.mode_ = value;
@@ -557,12 +554,12 @@ namespace lth.interface.egm {
       public Builder ClearMode() {
         PrepareBuilder();
         result.hasMode = false;
-        result.mode_ = global::lth.interface.egm.Header.Types.EGM_Mode.MODE_POSITION_STREAM;
+        result.mode_ = global::lth.egm.Header.Types.EGM_Mode.MODE_POSITION_STREAM;
         return this;
       }
     }
     static Header() {
-      object.ReferenceEquals(global::lth.interface.egm.LthEgmInterface.Descriptor, null);
+      object.ReferenceEquals(global::lth.egm.LthEgmInterface.Descriptor, null);
     }
   }
   
@@ -585,11 +582,11 @@ namespace lth.interface.egm {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::lth.interface.egm.LthEgmInterface.internal__static_lth_interface_egm_Position_Values__Descriptor; }
+      get { return global::lth.egm.LthEgmInterface.internal__static_lth_egm_Position_Values__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<Position_Values, Position_Values.Builder> InternalFieldAccessors {
-      get { return global::lth.interface.egm.LthEgmInterface.internal__static_lth_interface_egm_Position_Values__FieldAccessorTable; }
+      get { return global::lth.egm.LthEgmInterface.internal__static_lth_egm_Position_Values__FieldAccessorTable; }
     }
     
     public const int CartesianXFieldNumber = 1;
@@ -694,32 +691,32 @@ namespace lth.interface.egm {
     
     public const int RobotJointsFieldNumber = 11;
     private bool hasRobotJoints;
-    private global::lth.interface.egm.Joints robotJoints_;
+    private global::lth.egm.Joints robotJoints_;
     public bool HasRobotJoints {
       get { return hasRobotJoints; }
     }
-    public global::lth.interface.egm.Joints RobotJoints {
-      get { return robotJoints_ ?? global::lth.interface.egm.Joints.DefaultInstance; }
+    public global::lth.egm.Joints RobotJoints {
+      get { return robotJoints_ ?? global::lth.egm.Joints.DefaultInstance; }
     }
     
     public const int ExternalJointsFieldNumber = 12;
     private bool hasExternalJoints;
-    private global::lth.interface.egm.Joints externalJoints_;
+    private global::lth.egm.Joints externalJoints_;
     public bool HasExternalJoints {
       get { return hasExternalJoints; }
     }
-    public global::lth.interface.egm.Joints ExternalJoints {
-      get { return externalJoints_ ?? global::lth.interface.egm.Joints.DefaultInstance; }
+    public global::lth.egm.Joints ExternalJoints {
+      get { return externalJoints_ ?? global::lth.egm.Joints.DefaultInstance; }
     }
     
     public const int TimeFieldNumber = 13;
     private bool hasTime;
-    private global::lth.interface.egm.Time time_;
+    private global::lth.egm.Time time_;
     public bool HasTime {
       get { return hasTime; }
     }
-    public global::lth.interface.egm.Time Time {
-      get { return time_ ?? global::lth.interface.egm.Time.DefaultInstance; }
+    public global::lth.egm.Time Time {
+      get { return time_ ?? global::lth.egm.Time.DefaultInstance; }
     }
     
     public override bool IsInitialized {
@@ -924,11 +921,11 @@ namespace lth.interface.egm {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::lth.interface.egm.Position_Values.Descriptor; }
+        get { return global::lth.egm.Position_Values.Descriptor; }
       }
       
       public override Position_Values DefaultInstanceForType {
-        get { return global::lth.interface.egm.Position_Values.DefaultInstance; }
+        get { return global::lth.egm.Position_Values.DefaultInstance; }
       }
       
       public override Position_Values BuildPartial() {
@@ -949,7 +946,7 @@ namespace lth.interface.egm {
       }
       
       public override Builder MergeFrom(Position_Values other) {
-        if (other == global::lth.interface.egm.Position_Values.DefaultInstance) return this;
+        if (other == global::lth.egm.Position_Values.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasCartesianX) {
           CartesianX = other.CartesianX;
@@ -1074,7 +1071,7 @@ namespace lth.interface.egm {
               break;
             }
             case 90: {
-              global::lth.interface.egm.Joints.Builder subBuilder = global::lth.interface.egm.Joints.CreateBuilder();
+              global::lth.egm.Joints.Builder subBuilder = global::lth.egm.Joints.CreateBuilder();
               if (result.hasRobotJoints) {
                 subBuilder.MergeFrom(RobotJoints);
               }
@@ -1083,7 +1080,7 @@ namespace lth.interface.egm {
               break;
             }
             case 98: {
-              global::lth.interface.egm.Joints.Builder subBuilder = global::lth.interface.egm.Joints.CreateBuilder();
+              global::lth.egm.Joints.Builder subBuilder = global::lth.egm.Joints.CreateBuilder();
               if (result.hasExternalJoints) {
                 subBuilder.MergeFrom(ExternalJoints);
               }
@@ -1092,7 +1089,7 @@ namespace lth.interface.egm {
               break;
             }
             case 106: {
-              global::lth.interface.egm.Time.Builder subBuilder = global::lth.interface.egm.Time.CreateBuilder();
+              global::lth.egm.Time.Builder subBuilder = global::lth.egm.Time.CreateBuilder();
               if (result.hasTime) {
                 subBuilder.MergeFrom(Time);
               }
@@ -1313,30 +1310,30 @@ namespace lth.interface.egm {
       public bool HasRobotJoints {
        get { return result.hasRobotJoints; }
       }
-      public global::lth.interface.egm.Joints RobotJoints {
+      public global::lth.egm.Joints RobotJoints {
         get { return result.RobotJoints; }
         set { SetRobotJoints(value); }
       }
-      public Builder SetRobotJoints(global::lth.interface.egm.Joints value) {
+      public Builder SetRobotJoints(global::lth.egm.Joints value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasRobotJoints = true;
         result.robotJoints_ = value;
         return this;
       }
-      public Builder SetRobotJoints(global::lth.interface.egm.Joints.Builder builderForValue) {
+      public Builder SetRobotJoints(global::lth.egm.Joints.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasRobotJoints = true;
         result.robotJoints_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeRobotJoints(global::lth.interface.egm.Joints value) {
+      public Builder MergeRobotJoints(global::lth.egm.Joints value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasRobotJoints &&
-            result.robotJoints_ != global::lth.interface.egm.Joints.DefaultInstance) {
-            result.robotJoints_ = global::lth.interface.egm.Joints.CreateBuilder(result.robotJoints_).MergeFrom(value).BuildPartial();
+            result.robotJoints_ != global::lth.egm.Joints.DefaultInstance) {
+            result.robotJoints_ = global::lth.egm.Joints.CreateBuilder(result.robotJoints_).MergeFrom(value).BuildPartial();
         } else {
           result.robotJoints_ = value;
         }
@@ -1353,30 +1350,30 @@ namespace lth.interface.egm {
       public bool HasExternalJoints {
        get { return result.hasExternalJoints; }
       }
-      public global::lth.interface.egm.Joints ExternalJoints {
+      public global::lth.egm.Joints ExternalJoints {
         get { return result.ExternalJoints; }
         set { SetExternalJoints(value); }
       }
-      public Builder SetExternalJoints(global::lth.interface.egm.Joints value) {
+      public Builder SetExternalJoints(global::lth.egm.Joints value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasExternalJoints = true;
         result.externalJoints_ = value;
         return this;
       }
-      public Builder SetExternalJoints(global::lth.interface.egm.Joints.Builder builderForValue) {
+      public Builder SetExternalJoints(global::lth.egm.Joints.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasExternalJoints = true;
         result.externalJoints_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeExternalJoints(global::lth.interface.egm.Joints value) {
+      public Builder MergeExternalJoints(global::lth.egm.Joints value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasExternalJoints &&
-            result.externalJoints_ != global::lth.interface.egm.Joints.DefaultInstance) {
-            result.externalJoints_ = global::lth.interface.egm.Joints.CreateBuilder(result.externalJoints_).MergeFrom(value).BuildPartial();
+            result.externalJoints_ != global::lth.egm.Joints.DefaultInstance) {
+            result.externalJoints_ = global::lth.egm.Joints.CreateBuilder(result.externalJoints_).MergeFrom(value).BuildPartial();
         } else {
           result.externalJoints_ = value;
         }
@@ -1393,30 +1390,30 @@ namespace lth.interface.egm {
       public bool HasTime {
        get { return result.hasTime; }
       }
-      public global::lth.interface.egm.Time Time {
+      public global::lth.egm.Time Time {
         get { return result.Time; }
         set { SetTime(value); }
       }
-      public Builder SetTime(global::lth.interface.egm.Time value) {
+      public Builder SetTime(global::lth.egm.Time value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasTime = true;
         result.time_ = value;
         return this;
       }
-      public Builder SetTime(global::lth.interface.egm.Time.Builder builderForValue) {
+      public Builder SetTime(global::lth.egm.Time.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasTime = true;
         result.time_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeTime(global::lth.interface.egm.Time value) {
+      public Builder MergeTime(global::lth.egm.Time value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasTime &&
-            result.time_ != global::lth.interface.egm.Time.DefaultInstance) {
-            result.time_ = global::lth.interface.egm.Time.CreateBuilder(result.time_).MergeFrom(value).BuildPartial();
+            result.time_ != global::lth.egm.Time.DefaultInstance) {
+            result.time_ = global::lth.egm.Time.CreateBuilder(result.time_).MergeFrom(value).BuildPartial();
         } else {
           result.time_ = value;
         }
@@ -1431,7 +1428,7 @@ namespace lth.interface.egm {
       }
     }
     static Position_Values() {
-      object.ReferenceEquals(global::lth.interface.egm.LthEgmInterface.Descriptor, null);
+      object.ReferenceEquals(global::lth.egm.LthEgmInterface.Descriptor, null);
     }
   }
   
@@ -1454,11 +1451,11 @@ namespace lth.interface.egm {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::lth.interface.egm.LthEgmInterface.internal__static_lth_interface_egm_Joints__Descriptor; }
+      get { return global::lth.egm.LthEgmInterface.internal__static_lth_egm_Joints__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<Joints, Joints.Builder> InternalFieldAccessors {
-      get { return global::lth.interface.egm.LthEgmInterface.internal__static_lth_interface_egm_Joints__FieldAccessorTable; }
+      get { return global::lth.egm.LthEgmInterface.internal__static_lth_egm_Joints__FieldAccessorTable; }
     }
     
     public const int Joints_FieldNumber = 1;
@@ -1604,11 +1601,11 @@ namespace lth.interface.egm {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::lth.interface.egm.Joints.Descriptor; }
+        get { return global::lth.egm.Joints.Descriptor; }
       }
       
       public override Joints DefaultInstanceForType {
-        get { return global::lth.interface.egm.Joints.DefaultInstance; }
+        get { return global::lth.egm.Joints.DefaultInstance; }
       }
       
       public override Joints BuildPartial() {
@@ -1629,7 +1626,7 @@ namespace lth.interface.egm {
       }
       
       public override Builder MergeFrom(Joints other) {
-        if (other == global::lth.interface.egm.Joints.DefaultInstance) return this;
+        if (other == global::lth.egm.Joints.DefaultInstance) return this;
         PrepareBuilder();
         if (other.joints_.Count != 0) {
           result.joints_.Add(other.joints_);
@@ -1723,7 +1720,7 @@ namespace lth.interface.egm {
       }
     }
     static Joints() {
-      object.ReferenceEquals(global::lth.interface.egm.LthEgmInterface.Descriptor, null);
+      object.ReferenceEquals(global::lth.egm.LthEgmInterface.Descriptor, null);
     }
   }
   
@@ -1746,11 +1743,11 @@ namespace lth.interface.egm {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::lth.interface.egm.LthEgmInterface.internal__static_lth_interface_egm_Time__Descriptor; }
+      get { return global::lth.egm.LthEgmInterface.internal__static_lth_egm_Time__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<Time, Time.Builder> InternalFieldAccessors {
-      get { return global::lth.interface.egm.LthEgmInterface.internal__static_lth_interface_egm_Time__FieldAccessorTable; }
+      get { return global::lth.egm.LthEgmInterface.internal__static_lth_egm_Time__FieldAccessorTable; }
     }
     
     public const int SecFieldNumber = 1;
@@ -1910,11 +1907,11 @@ namespace lth.interface.egm {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::lth.interface.egm.Time.Descriptor; }
+        get { return global::lth.egm.Time.Descriptor; }
       }
       
       public override Time DefaultInstanceForType {
-        get { return global::lth.interface.egm.Time.DefaultInstance; }
+        get { return global::lth.egm.Time.DefaultInstance; }
       }
       
       public override Time BuildPartial() {
@@ -1935,7 +1932,7 @@ namespace lth.interface.egm {
       }
       
       public override Builder MergeFrom(Time other) {
-        if (other == global::lth.interface.egm.Time.DefaultInstance) return this;
+        if (other == global::lth.egm.Time.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasSec) {
           Sec = other.Sec;
@@ -2049,7 +2046,7 @@ namespace lth.interface.egm {
       }
     }
     static Time() {
-      object.ReferenceEquals(global::lth.interface.egm.LthEgmInterface.Descriptor, null);
+      object.ReferenceEquals(global::lth.egm.LthEgmInterface.Descriptor, null);
     }
   }
   
@@ -2072,11 +2069,11 @@ namespace lth.interface.egm {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::lth.interface.egm.LthEgmInterface.internal__static_lth_interface_egm_Feedback_Values__Descriptor; }
+      get { return global::lth.egm.LthEgmInterface.internal__static_lth_egm_Feedback_Values__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<Feedback_Values, Feedback_Values.Builder> InternalFieldAccessors {
-      get { return global::lth.interface.egm.LthEgmInterface.internal__static_lth_interface_egm_Feedback_Values__FieldAccessorTable; }
+      get { return global::lth.egm.LthEgmInterface.internal__static_lth_egm_Feedback_Values__FieldAccessorTable; }
     }
     
     #region Nested types
@@ -2106,21 +2103,21 @@ namespace lth.interface.egm {
     
     public const int MotorStateFieldNumber = 1;
     private bool hasMotorState;
-    private global::lth.interface.egm.Feedback_Values.Types.MotorStateType motorState_ = global::lth.interface.egm.Feedback_Values.Types.MotorStateType.MOTORS_UNDEFINED;
+    private global::lth.egm.Feedback_Values.Types.MotorStateType motorState_ = global::lth.egm.Feedback_Values.Types.MotorStateType.MOTORS_UNDEFINED;
     public bool HasMotorState {
       get { return hasMotorState; }
     }
-    public global::lth.interface.egm.Feedback_Values.Types.MotorStateType MotorState {
+    public global::lth.egm.Feedback_Values.Types.MotorStateType MotorState {
       get { return motorState_; }
     }
     
     public const int MciStateFieldNumber = 2;
     private bool hasMciState;
-    private global::lth.interface.egm.Feedback_Values.Types.MCIStateType mciState_ = global::lth.interface.egm.Feedback_Values.Types.MCIStateType.MCI_UNDEFINED;
+    private global::lth.egm.Feedback_Values.Types.MCIStateType mciState_ = global::lth.egm.Feedback_Values.Types.MCIStateType.MCI_UNDEFINED;
     public bool HasMciState {
       get { return hasMciState; }
     }
-    public global::lth.interface.egm.Feedback_Values.Types.MCIStateType MciState {
+    public global::lth.egm.Feedback_Values.Types.MCIStateType MciState {
       get { return mciState_; }
     }
     
@@ -2136,11 +2133,11 @@ namespace lth.interface.egm {
     
     public const int RapidExceStateFieldNumber = 4;
     private bool hasRapidExceState;
-    private global::lth.interface.egm.Feedback_Values.Types.RapidCtrlExecStateType rapidExceState_ = global::lth.interface.egm.Feedback_Values.Types.RapidCtrlExecStateType.RAPID_UNDEFINED;
+    private global::lth.egm.Feedback_Values.Types.RapidCtrlExecStateType rapidExceState_ = global::lth.egm.Feedback_Values.Types.RapidCtrlExecStateType.RAPID_UNDEFINED;
     public bool HasRapidExceState {
       get { return hasRapidExceState; }
     }
-    public global::lth.interface.egm.Feedback_Values.Types.RapidCtrlExecStateType RapidExceState {
+    public global::lth.egm.Feedback_Values.Types.RapidCtrlExecStateType RapidExceState {
       get { return rapidExceState_; }
     }
     
@@ -2333,11 +2330,11 @@ namespace lth.interface.egm {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::lth.interface.egm.Feedback_Values.Descriptor; }
+        get { return global::lth.egm.Feedback_Values.Descriptor; }
       }
       
       public override Feedback_Values DefaultInstanceForType {
-        get { return global::lth.interface.egm.Feedback_Values.DefaultInstance; }
+        get { return global::lth.egm.Feedback_Values.DefaultInstance; }
       }
       
       public override Feedback_Values BuildPartial() {
@@ -2358,7 +2355,7 @@ namespace lth.interface.egm {
       }
       
       public override Builder MergeFrom(Feedback_Values other) {
-        if (other == global::lth.interface.egm.Feedback_Values.DefaultInstance) return this;
+        if (other == global::lth.egm.Feedback_Values.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasMotorState) {
           MotorState = other.MotorState;
@@ -2484,11 +2481,11 @@ namespace lth.interface.egm {
       public bool HasMotorState {
        get { return result.hasMotorState; }
       }
-      public global::lth.interface.egm.Feedback_Values.Types.MotorStateType MotorState {
+      public global::lth.egm.Feedback_Values.Types.MotorStateType MotorState {
         get { return result.MotorState; }
         set { SetMotorState(value); }
       }
-      public Builder SetMotorState(global::lth.interface.egm.Feedback_Values.Types.MotorStateType value) {
+      public Builder SetMotorState(global::lth.egm.Feedback_Values.Types.MotorStateType value) {
         PrepareBuilder();
         result.hasMotorState = true;
         result.motorState_ = value;
@@ -2497,18 +2494,18 @@ namespace lth.interface.egm {
       public Builder ClearMotorState() {
         PrepareBuilder();
         result.hasMotorState = false;
-        result.motorState_ = global::lth.interface.egm.Feedback_Values.Types.MotorStateType.MOTORS_UNDEFINED;
+        result.motorState_ = global::lth.egm.Feedback_Values.Types.MotorStateType.MOTORS_UNDEFINED;
         return this;
       }
       
       public bool HasMciState {
        get { return result.hasMciState; }
       }
-      public global::lth.interface.egm.Feedback_Values.Types.MCIStateType MciState {
+      public global::lth.egm.Feedback_Values.Types.MCIStateType MciState {
         get { return result.MciState; }
         set { SetMciState(value); }
       }
-      public Builder SetMciState(global::lth.interface.egm.Feedback_Values.Types.MCIStateType value) {
+      public Builder SetMciState(global::lth.egm.Feedback_Values.Types.MCIStateType value) {
         PrepareBuilder();
         result.hasMciState = true;
         result.mciState_ = value;
@@ -2517,7 +2514,7 @@ namespace lth.interface.egm {
       public Builder ClearMciState() {
         PrepareBuilder();
         result.hasMciState = false;
-        result.mciState_ = global::lth.interface.egm.Feedback_Values.Types.MCIStateType.MCI_UNDEFINED;
+        result.mciState_ = global::lth.egm.Feedback_Values.Types.MCIStateType.MCI_UNDEFINED;
         return this;
       }
       
@@ -2544,11 +2541,11 @@ namespace lth.interface.egm {
       public bool HasRapidExceState {
        get { return result.hasRapidExceState; }
       }
-      public global::lth.interface.egm.Feedback_Values.Types.RapidCtrlExecStateType RapidExceState {
+      public global::lth.egm.Feedback_Values.Types.RapidCtrlExecStateType RapidExceState {
         get { return result.RapidExceState; }
         set { SetRapidExceState(value); }
       }
-      public Builder SetRapidExceState(global::lth.interface.egm.Feedback_Values.Types.RapidCtrlExecStateType value) {
+      public Builder SetRapidExceState(global::lth.egm.Feedback_Values.Types.RapidCtrlExecStateType value) {
         PrepareBuilder();
         result.hasRapidExceState = true;
         result.rapidExceState_ = value;
@@ -2557,7 +2554,7 @@ namespace lth.interface.egm {
       public Builder ClearRapidExceState() {
         PrepareBuilder();
         result.hasRapidExceState = false;
-        result.rapidExceState_ = global::lth.interface.egm.Feedback_Values.Types.RapidCtrlExecStateType.RAPID_UNDEFINED;
+        result.rapidExceState_ = global::lth.egm.Feedback_Values.Types.RapidCtrlExecStateType.RAPID_UNDEFINED;
         return this;
       }
       
@@ -2622,7 +2619,7 @@ namespace lth.interface.egm {
       }
     }
     static Feedback_Values() {
-      object.ReferenceEquals(global::lth.interface.egm.LthEgmInterface.Descriptor, null);
+      object.ReferenceEquals(global::lth.egm.LthEgmInterface.Descriptor, null);
     }
   }
   
@@ -2645,61 +2642,61 @@ namespace lth.interface.egm {
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::lth.interface.egm.LthEgmInterface.internal__static_lth_interface_egm_EGM_Control__Descriptor; }
+      get { return global::lth.egm.LthEgmInterface.internal__static_lth_egm_EGM_Control__Descriptor; }
     }
     
     protected override pb::FieldAccess.FieldAccessorTable<EGM_Control, EGM_Control.Builder> InternalFieldAccessors {
-      get { return global::lth.interface.egm.LthEgmInterface.internal__static_lth_interface_egm_EGM_Control__FieldAccessorTable; }
+      get { return global::lth.egm.LthEgmInterface.internal__static_lth_egm_EGM_Control__FieldAccessorTable; }
     }
     
     public const int HeaderFieldNumber = 1;
     private bool hasHeader;
-    private global::lth.interface.egm.Header header_;
+    private global::lth.egm.Header header_;
     public bool HasHeader {
       get { return hasHeader; }
     }
-    public global::lth.interface.egm.Header Header {
-      get { return header_ ?? global::lth.interface.egm.Header.DefaultInstance; }
+    public global::lth.egm.Header Header {
+      get { return header_ ?? global::lth.egm.Header.DefaultInstance; }
     }
     
     public const int DesiredPositionFieldNumber = 2;
     private bool hasDesiredPosition;
-    private global::lth.interface.egm.Position_Values desiredPosition_;
+    private global::lth.egm.Position_Values desiredPosition_;
     public bool HasDesiredPosition {
       get { return hasDesiredPosition; }
     }
-    public global::lth.interface.egm.Position_Values DesiredPosition {
-      get { return desiredPosition_ ?? global::lth.interface.egm.Position_Values.DefaultInstance; }
+    public global::lth.egm.Position_Values DesiredPosition {
+      get { return desiredPosition_ ?? global::lth.egm.Position_Values.DefaultInstance; }
     }
     
     public const int CurrentPositionFieldNumber = 3;
     private bool hasCurrentPosition;
-    private global::lth.interface.egm.Position_Values currentPosition_;
+    private global::lth.egm.Position_Values currentPosition_;
     public bool HasCurrentPosition {
       get { return hasCurrentPosition; }
     }
-    public global::lth.interface.egm.Position_Values CurrentPosition {
-      get { return currentPosition_ ?? global::lth.interface.egm.Position_Values.DefaultInstance; }
+    public global::lth.egm.Position_Values CurrentPosition {
+      get { return currentPosition_ ?? global::lth.egm.Position_Values.DefaultInstance; }
     }
     
     public const int PlannedPositionFieldNumber = 4;
     private bool hasPlannedPosition;
-    private global::lth.interface.egm.Position_Values plannedPosition_;
+    private global::lth.egm.Position_Values plannedPosition_;
     public bool HasPlannedPosition {
       get { return hasPlannedPosition; }
     }
-    public global::lth.interface.egm.Position_Values PlannedPosition {
-      get { return plannedPosition_ ?? global::lth.interface.egm.Position_Values.DefaultInstance; }
+    public global::lth.egm.Position_Values PlannedPosition {
+      get { return plannedPosition_ ?? global::lth.egm.Position_Values.DefaultInstance; }
     }
     
     public const int FeedbackFieldNumber = 5;
     private bool hasFeedback;
-    private global::lth.interface.egm.Feedback_Values feedback_;
+    private global::lth.egm.Feedback_Values feedback_;
     public bool HasFeedback {
       get { return hasFeedback; }
     }
-    public global::lth.interface.egm.Feedback_Values Feedback {
-      get { return feedback_ ?? global::lth.interface.egm.Feedback_Values.DefaultInstance; }
+    public global::lth.egm.Feedback_Values Feedback {
+      get { return feedback_ ?? global::lth.egm.Feedback_Values.DefaultInstance; }
     }
     
     public override bool IsInitialized {
@@ -2863,11 +2860,11 @@ namespace lth.interface.egm {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::lth.interface.egm.EGM_Control.Descriptor; }
+        get { return global::lth.egm.EGM_Control.Descriptor; }
       }
       
       public override EGM_Control DefaultInstanceForType {
-        get { return global::lth.interface.egm.EGM_Control.DefaultInstance; }
+        get { return global::lth.egm.EGM_Control.DefaultInstance; }
       }
       
       public override EGM_Control BuildPartial() {
@@ -2888,7 +2885,7 @@ namespace lth.interface.egm {
       }
       
       public override Builder MergeFrom(EGM_Control other) {
-        if (other == global::lth.interface.egm.EGM_Control.DefaultInstance) return this;
+        if (other == global::lth.egm.EGM_Control.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasHeader) {
           MergeHeader(other.Header);
@@ -2949,7 +2946,7 @@ namespace lth.interface.egm {
               break;
             }
             case 10: {
-              global::lth.interface.egm.Header.Builder subBuilder = global::lth.interface.egm.Header.CreateBuilder();
+              global::lth.egm.Header.Builder subBuilder = global::lth.egm.Header.CreateBuilder();
               if (result.hasHeader) {
                 subBuilder.MergeFrom(Header);
               }
@@ -2958,7 +2955,7 @@ namespace lth.interface.egm {
               break;
             }
             case 18: {
-              global::lth.interface.egm.Position_Values.Builder subBuilder = global::lth.interface.egm.Position_Values.CreateBuilder();
+              global::lth.egm.Position_Values.Builder subBuilder = global::lth.egm.Position_Values.CreateBuilder();
               if (result.hasDesiredPosition) {
                 subBuilder.MergeFrom(DesiredPosition);
               }
@@ -2967,7 +2964,7 @@ namespace lth.interface.egm {
               break;
             }
             case 26: {
-              global::lth.interface.egm.Position_Values.Builder subBuilder = global::lth.interface.egm.Position_Values.CreateBuilder();
+              global::lth.egm.Position_Values.Builder subBuilder = global::lth.egm.Position_Values.CreateBuilder();
               if (result.hasCurrentPosition) {
                 subBuilder.MergeFrom(CurrentPosition);
               }
@@ -2976,7 +2973,7 @@ namespace lth.interface.egm {
               break;
             }
             case 34: {
-              global::lth.interface.egm.Position_Values.Builder subBuilder = global::lth.interface.egm.Position_Values.CreateBuilder();
+              global::lth.egm.Position_Values.Builder subBuilder = global::lth.egm.Position_Values.CreateBuilder();
               if (result.hasPlannedPosition) {
                 subBuilder.MergeFrom(PlannedPosition);
               }
@@ -2985,7 +2982,7 @@ namespace lth.interface.egm {
               break;
             }
             case 42: {
-              global::lth.interface.egm.Feedback_Values.Builder subBuilder = global::lth.interface.egm.Feedback_Values.CreateBuilder();
+              global::lth.egm.Feedback_Values.Builder subBuilder = global::lth.egm.Feedback_Values.CreateBuilder();
               if (result.hasFeedback) {
                 subBuilder.MergeFrom(Feedback);
               }
@@ -3006,30 +3003,30 @@ namespace lth.interface.egm {
       public bool HasHeader {
        get { return result.hasHeader; }
       }
-      public global::lth.interface.egm.Header Header {
+      public global::lth.egm.Header Header {
         get { return result.Header; }
         set { SetHeader(value); }
       }
-      public Builder SetHeader(global::lth.interface.egm.Header value) {
+      public Builder SetHeader(global::lth.egm.Header value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasHeader = true;
         result.header_ = value;
         return this;
       }
-      public Builder SetHeader(global::lth.interface.egm.Header.Builder builderForValue) {
+      public Builder SetHeader(global::lth.egm.Header.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasHeader = true;
         result.header_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeHeader(global::lth.interface.egm.Header value) {
+      public Builder MergeHeader(global::lth.egm.Header value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasHeader &&
-            result.header_ != global::lth.interface.egm.Header.DefaultInstance) {
-            result.header_ = global::lth.interface.egm.Header.CreateBuilder(result.header_).MergeFrom(value).BuildPartial();
+            result.header_ != global::lth.egm.Header.DefaultInstance) {
+            result.header_ = global::lth.egm.Header.CreateBuilder(result.header_).MergeFrom(value).BuildPartial();
         } else {
           result.header_ = value;
         }
@@ -3046,30 +3043,30 @@ namespace lth.interface.egm {
       public bool HasDesiredPosition {
        get { return result.hasDesiredPosition; }
       }
-      public global::lth.interface.egm.Position_Values DesiredPosition {
+      public global::lth.egm.Position_Values DesiredPosition {
         get { return result.DesiredPosition; }
         set { SetDesiredPosition(value); }
       }
-      public Builder SetDesiredPosition(global::lth.interface.egm.Position_Values value) {
+      public Builder SetDesiredPosition(global::lth.egm.Position_Values value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasDesiredPosition = true;
         result.desiredPosition_ = value;
         return this;
       }
-      public Builder SetDesiredPosition(global::lth.interface.egm.Position_Values.Builder builderForValue) {
+      public Builder SetDesiredPosition(global::lth.egm.Position_Values.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasDesiredPosition = true;
         result.desiredPosition_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeDesiredPosition(global::lth.interface.egm.Position_Values value) {
+      public Builder MergeDesiredPosition(global::lth.egm.Position_Values value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasDesiredPosition &&
-            result.desiredPosition_ != global::lth.interface.egm.Position_Values.DefaultInstance) {
-            result.desiredPosition_ = global::lth.interface.egm.Position_Values.CreateBuilder(result.desiredPosition_).MergeFrom(value).BuildPartial();
+            result.desiredPosition_ != global::lth.egm.Position_Values.DefaultInstance) {
+            result.desiredPosition_ = global::lth.egm.Position_Values.CreateBuilder(result.desiredPosition_).MergeFrom(value).BuildPartial();
         } else {
           result.desiredPosition_ = value;
         }
@@ -3086,30 +3083,30 @@ namespace lth.interface.egm {
       public bool HasCurrentPosition {
        get { return result.hasCurrentPosition; }
       }
-      public global::lth.interface.egm.Position_Values CurrentPosition {
+      public global::lth.egm.Position_Values CurrentPosition {
         get { return result.CurrentPosition; }
         set { SetCurrentPosition(value); }
       }
-      public Builder SetCurrentPosition(global::lth.interface.egm.Position_Values value) {
+      public Builder SetCurrentPosition(global::lth.egm.Position_Values value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasCurrentPosition = true;
         result.currentPosition_ = value;
         return this;
       }
-      public Builder SetCurrentPosition(global::lth.interface.egm.Position_Values.Builder builderForValue) {
+      public Builder SetCurrentPosition(global::lth.egm.Position_Values.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasCurrentPosition = true;
         result.currentPosition_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeCurrentPosition(global::lth.interface.egm.Position_Values value) {
+      public Builder MergeCurrentPosition(global::lth.egm.Position_Values value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasCurrentPosition &&
-            result.currentPosition_ != global::lth.interface.egm.Position_Values.DefaultInstance) {
-            result.currentPosition_ = global::lth.interface.egm.Position_Values.CreateBuilder(result.currentPosition_).MergeFrom(value).BuildPartial();
+            result.currentPosition_ != global::lth.egm.Position_Values.DefaultInstance) {
+            result.currentPosition_ = global::lth.egm.Position_Values.CreateBuilder(result.currentPosition_).MergeFrom(value).BuildPartial();
         } else {
           result.currentPosition_ = value;
         }
@@ -3126,30 +3123,30 @@ namespace lth.interface.egm {
       public bool HasPlannedPosition {
        get { return result.hasPlannedPosition; }
       }
-      public global::lth.interface.egm.Position_Values PlannedPosition {
+      public global::lth.egm.Position_Values PlannedPosition {
         get { return result.PlannedPosition; }
         set { SetPlannedPosition(value); }
       }
-      public Builder SetPlannedPosition(global::lth.interface.egm.Position_Values value) {
+      public Builder SetPlannedPosition(global::lth.egm.Position_Values value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasPlannedPosition = true;
         result.plannedPosition_ = value;
         return this;
       }
-      public Builder SetPlannedPosition(global::lth.interface.egm.Position_Values.Builder builderForValue) {
+      public Builder SetPlannedPosition(global::lth.egm.Position_Values.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasPlannedPosition = true;
         result.plannedPosition_ = builderForValue.Build();
         return this;
       }
-      public Builder MergePlannedPosition(global::lth.interface.egm.Position_Values value) {
+      public Builder MergePlannedPosition(global::lth.egm.Position_Values value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasPlannedPosition &&
-            result.plannedPosition_ != global::lth.interface.egm.Position_Values.DefaultInstance) {
-            result.plannedPosition_ = global::lth.interface.egm.Position_Values.CreateBuilder(result.plannedPosition_).MergeFrom(value).BuildPartial();
+            result.plannedPosition_ != global::lth.egm.Position_Values.DefaultInstance) {
+            result.plannedPosition_ = global::lth.egm.Position_Values.CreateBuilder(result.plannedPosition_).MergeFrom(value).BuildPartial();
         } else {
           result.plannedPosition_ = value;
         }
@@ -3166,30 +3163,30 @@ namespace lth.interface.egm {
       public bool HasFeedback {
        get { return result.hasFeedback; }
       }
-      public global::lth.interface.egm.Feedback_Values Feedback {
+      public global::lth.egm.Feedback_Values Feedback {
         get { return result.Feedback; }
         set { SetFeedback(value); }
       }
-      public Builder SetFeedback(global::lth.interface.egm.Feedback_Values value) {
+      public Builder SetFeedback(global::lth.egm.Feedback_Values value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasFeedback = true;
         result.feedback_ = value;
         return this;
       }
-      public Builder SetFeedback(global::lth.interface.egm.Feedback_Values.Builder builderForValue) {
+      public Builder SetFeedback(global::lth.egm.Feedback_Values.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
         result.hasFeedback = true;
         result.feedback_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeFeedback(global::lth.interface.egm.Feedback_Values value) {
+      public Builder MergeFeedback(global::lth.egm.Feedback_Values value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         if (result.hasFeedback &&
-            result.feedback_ != global::lth.interface.egm.Feedback_Values.DefaultInstance) {
-            result.feedback_ = global::lth.interface.egm.Feedback_Values.CreateBuilder(result.feedback_).MergeFrom(value).BuildPartial();
+            result.feedback_ != global::lth.egm.Feedback_Values.DefaultInstance) {
+            result.feedback_ = global::lth.egm.Feedback_Values.CreateBuilder(result.feedback_).MergeFrom(value).BuildPartial();
         } else {
           result.feedback_ = value;
         }
@@ -3204,7 +3201,7 @@ namespace lth.interface.egm {
       }
     }
     static EGM_Control() {
-      object.ReferenceEquals(global::lth.interface.egm.LthEgmInterface.Descriptor, null);
+      object.ReferenceEquals(global::lth.egm.LthEgmInterface.Descriptor, null);
     }
   }
   
