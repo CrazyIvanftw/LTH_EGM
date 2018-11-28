@@ -15,6 +15,8 @@ namespace LTH_EGM
         private Robot_pose feedback;
         // Planned
         private Robot_pose planned;
+        // desired
+        private Robot_pose desired;
         // Motor State
         private int motorState;
         // MCI State
@@ -39,6 +41,7 @@ namespace LTH_EGM
         public int RapidExceState { get => rapidExceState; set => rapidExceState = value; }
         public double[] MesauredForce { get => mesauredForce; set => mesauredForce = value; }
         public IList<double> TestSignals { get => testSignals; set => testSignals = value; }
+        public Robot_pose Desired { get => desired; set => desired = value; }
 
         public string PrintOut()
         {

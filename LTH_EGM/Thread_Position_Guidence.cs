@@ -50,6 +50,11 @@ namespace LTH_EGM
             return;
         }
 
+        public override void CreateMessage(Abstract_Data_Structure behavior)
+        {
+            throw new NotImplementedException();
+        }
+
         public override void ProcessData(UdpClient udpServer, IPEndPoint remoteEP, byte[] data, Abstract_Data_Structure behavior)
         {
             EGM_Sensor_Server_Behavior behave = (EGM_Sensor_Server_Behavior)behavior;
