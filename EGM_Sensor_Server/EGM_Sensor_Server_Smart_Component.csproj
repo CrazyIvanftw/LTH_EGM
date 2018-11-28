@@ -36,17 +36,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ABB.Robotics.Math">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>$(ProgramFiles)\ABB Industrial IT\Robotics IT\SDK\RobotStudio SDK 6.07\ABB.Robotics.Math.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ABB.Robotics.RobotStudio">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>$(ProgramFiles)\ABB Industrial IT\Robotics IT\SDK\RobotStudio SDK 6.07\ABB.Robotics.RobotStudio.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ABB.Robotics.RobotStudio.Stations">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>$(ProgramFiles)\ABB Industrial IT\Robotics IT\SDK\RobotStudio SDK 6.07\ABB.Robotics.RobotStudio.Stations.dll</HintPath>
       <Private>False</Private>
     </Reference>
