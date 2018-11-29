@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EGM_Sensor_Server_Smart_Component", "EGM_Sensor_Server\EGM_Sensor_Server_Smart_Component.csproj", "{996EBE59-7EC1-49CD-BDB4-7F09D1F41378}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EGM_Sensor_Controller_Smart_Component", "EGM_Sensor_Controller\EGM_Sensor_Controller_Smart_Component.csproj", "{74A4BEFA-87C8-4974-A7C6-EB62FE8E08C7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LTH_EGM", "LTH_EGM\LTH_EGM.csproj", "{E10AD5DB-C475-44D8-8DD6-92D67CFECD33}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_Ex.cs", "Test_Ex.cs\Test_Ex.cs.csproj", "{3CFC6584-F069-4C91-A0C3-0DCAB24AE3F5}"
@@ -15,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server_data_structure_test"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client_Test", "Client_Test\Client_Test.csproj", "{4A30ED98-5DDF-4AF9-8E73-1857E63B46B7}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "EGM_Line_Sensor_Smart_Component", "EGM_Line_Sensor_Smart_Component\EGM_Line_Sensor_Smart_Component.csproj", "{9E23B5E1-4762-432A-AA73-2AA84060F1AD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mac_Test", "Mac_Test\Mac_Test.csproj", "{90613246-88ED-4DD8-B693-7AA305D9EF5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,14 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{996EBE59-7EC1-49CD-BDB4-7F09D1F41378}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{996EBE59-7EC1-49CD-BDB4-7F09D1F41378}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{996EBE59-7EC1-49CD-BDB4-7F09D1F41378}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{996EBE59-7EC1-49CD-BDB4-7F09D1F41378}.Release|Any CPU.Build.0 = Release|Any CPU
-		{74A4BEFA-87C8-4974-A7C6-EB62FE8E08C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{74A4BEFA-87C8-4974-A7C6-EB62FE8E08C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{74A4BEFA-87C8-4974-A7C6-EB62FE8E08C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{74A4BEFA-87C8-4974-A7C6-EB62FE8E08C7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E10AD5DB-C475-44D8-8DD6-92D67CFECD33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E10AD5DB-C475-44D8-8DD6-92D67CFECD33}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E10AD5DB-C475-44D8-8DD6-92D67CFECD33}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -47,10 +35,10 @@ Global
 		{4A30ED98-5DDF-4AF9-8E73-1857E63B46B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A30ED98-5DDF-4AF9-8E73-1857E63B46B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A30ED98-5DDF-4AF9-8E73-1857E63B46B7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9E23B5E1-4762-432A-AA73-2AA84060F1AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9E23B5E1-4762-432A-AA73-2AA84060F1AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9E23B5E1-4762-432A-AA73-2AA84060F1AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9E23B5E1-4762-432A-AA73-2AA84060F1AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90613246-88ED-4DD8-B693-7AA305D9EF5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90613246-88ED-4DD8-B693-7AA305D9EF5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90613246-88ED-4DD8-B693-7AA305D9EF5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90613246-88ED-4DD8-B693-7AA305D9EF5F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

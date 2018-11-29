@@ -1,9 +1,13 @@
 ﻿using lth.egmTest;
+using lth.egm;
+using abb.egmri;
+using abb.egm;
 using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.IO;
+using LTH_EGM;
 
 namespace Client_Test
 {
@@ -12,10 +16,25 @@ namespace Client_Test
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            A_Dummy_Server s = new A_Dummy_Server();
+            Console.WriteLine("Hello Dummy Server!");
+            s.StartServer();
+            Console.WriteLine("Dummy Started!");
             UDPSocket c = new UDPSocket();
-            c.Client("127.0.0.1", 6789);
+            c.Client("127.0.0.1", (int)LTH_EGM.Port_Numbers.SERVER_PORT);
+
             //c.Send("42!");
-            c.gpbSend(42, "The meaning of life, the universe, and everything is...");
+            //c.gpbSend(42, "The meaning of life, the universe, and everything is...");
+            //Packet.Builder packet = Packet.CreateBuilder();//is there a difference?
+            //lth.egmTest.Header.Builder header = new lth.egmTest.Header.Builder();//create builder or new builder?
+            //Body.Builder body = Body.CreateBuilder();// I dunno, let's find out :)
+            //header.SetSender(42);
+            //body.SetMsg("the answer is...");
+            //packet.SetHeader(header);
+            //packet.SetBody(body);
+            //lth.egmTest.Packet testPacket = packet.Build();
+            //Console.WriteLine(testPacket);
+
         }
     }
 
@@ -59,7 +78,7 @@ namespace Client_Test
         public void gpbSend(Int32 sender, string message)
         {
             Packet.Builder packet = Packet.CreateBuilder();//is there a difference?
-            Header.Builder header = new Header.Builder();//create builder or new builder?
+            lth.egmTest.Header.Builder header = new lth.egmTest.Header.Builder();//create builder or new builder?
             Body.Builder body = Body.CreateBuilder();// I dunno, let's find out :)
             header.SetSender(sender);
             body.SetMsg(message);
@@ -68,6 +87,32 @@ namespace Client_Test
             using (MemoryStream memoryStream = new MemoryStream())
             {
                 Packet dataPacket = packet.Build();
+                dataPacket.WriteTo(memoryStream);
+                _socket.BeginSend(memoryStream.ToArray(), 0, (int)memoryStream.Length, SocketFlags.None, (ar) =>
+                {
+                    State so = (State)ar.AsyncState;
+                    int bytes = _socket.EndSend(ar);
+                    Console.WriteLine("SEND: {0}", bytes);
+                }, state);
+            }
+        }
+
+        public void egmriSend()
+        {
+
+        }
+
+        public void egmInterfaceSend()
+        {
+            lth.egm.Header.Builder header = new lth.egm.Header.Builder();
+            header.SetTm((uint)System.DateTime.Now.Ticks);
+            header.SetMtype(lth.egm.Header.Types.MessageType.MSGTYPE_REQUEST_ALL_VALUES);
+            lth.egm.EGM_Control.Builder control = new EGM_Control.Builder();
+            control.SetHeader(header);
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                //Packet dataPacket = packet.Build();
+                lth.egm.EGM_Control dataPacket = control.Build();
                 dataPacket.WriteTo(memoryStream);
                 _socket.BeginSend(memoryStream.ToArray(), 0, (int)memoryStream.Length, SocketFlags.None, (ar) =>
                 {

@@ -251,6 +251,8 @@ namespace LTH_EGM
         {
             EGM_Sensor_Server_Behavior behave = (EGM_Sensor_Server_Behavior)behavior;
             EGM_Control control = EGM_Control.CreateBuilder().MergeFrom(data).Build();
+            Console.WriteLine("In Server Thread!!!");
+            Console.WriteLine(control);
             int type = (int)control.Header.Mtype;
             switch (type)
             {
@@ -326,6 +328,8 @@ namespace LTH_EGM
             using (MemoryStream memoryStream = new MemoryStream())
             {
                 EGM_Control message = response.Build();
+                Console.WriteLine("message to send back:");
+                Console.WriteLine(message);
                 message.WriteTo(memoryStream);
                 // send the udp message to the robot
                 int bytesSent = udpServer.Send(memoryStream.ToArray(),

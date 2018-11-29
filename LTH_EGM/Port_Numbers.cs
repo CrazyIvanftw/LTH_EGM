@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LTH_EGM
 {
-    enum Port_Numbers
+    public enum Port_Numbers
     {
         POS_STREAM_PORT = 6510,
         POS_GUIDE_PORT = 6511,
