@@ -20,9 +20,16 @@ namespace Client_Test
             Console.WriteLine("Hello Dummy Server!");
             s.StartServer();
             Console.WriteLine("Dummy Started!");
-            UDPSocket c = new UDPSocket();
-            c.Client("127.0.0.1", (int)LTH_EGM.Port_Numbers.SERVER_PORT);
-            c.egmInterfaceSend();
+
+            Console.WriteLine("Press any key to stop server...");
+            Console.ReadKey();
+            s.StopServer();
+            Console.WriteLine("Server stopped...");
+            Console.ReadKey();
+
+            //UDPSocket c = new UDPSocket();
+            //c.Client("127.0.0.1", (int)LTH_EGM.Port_Numbers.SERVER_PORT);
+            //c.egmInterfaceSend();
             //c.Send("42!");
             //c.gpbSend(42, "The meaning of life, the universe, and everything is...");
             //Packet.Builder packet = Packet.CreateBuilder();//is there a difference?
