@@ -46,6 +46,8 @@ namespace LTH_EGM
         public string PrintOut()
         {
             string s = $"\n seqno:{seqno}  tm:{tm}  mtype:{mtype}" +
+                $"\n desired: " +
+                desired.PrintOut() +
                 $"\n feedback: " +
                 feedback.PrintOut() +
                 $"\n planned: " +

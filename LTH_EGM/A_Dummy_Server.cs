@@ -35,6 +35,7 @@ namespace LTH_EGM
             }
             behavior.TestSignals = list;
             behavior.MesauredForce = new double[] { 0, 1, 2, 3, 4, 5 };
+            Console.WriteLine(behavior.PrintOut());
         }
 
         public void StartServer()

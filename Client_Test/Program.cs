@@ -22,7 +22,7 @@ namespace Client_Test
             Console.WriteLine("Dummy Started!");
             UDPSocket c = new UDPSocket();
             c.Client("127.0.0.1", (int)LTH_EGM.Port_Numbers.SERVER_PORT);
-
+            c.egmInterfaceSend();
             //c.Send("42!");
             //c.gpbSend(42, "The meaning of life, the universe, and everything is...");
             //Packet.Builder packet = Packet.CreateBuilder();//is there a difference?
@@ -131,6 +131,9 @@ namespace Client_Test
                 int bytes = _socket.EndReceiveFrom(ar, ref epFrom);
                 _socket.BeginReceiveFrom(so.buffer, 0, bufSize, SocketFlags.None, ref epFrom, recv, so);
                 Console.WriteLine("RECV: {0}: {1}, {2}", epFrom.ToString(), bytes, Encoding.ASCII.GetString(so.buffer, 0, bytes));
+
+                //EGM_Control message = EGM_Control.CreateBuilder().MergeFrom(so.buffer).Build();
+                //Console.WriteLine(message);
             }, state);
         }
     }

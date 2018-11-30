@@ -38,6 +38,7 @@ namespace LTH_EGM
             Position_Values.Builder planned = new Position_Values.Builder();
             Feedback_Values.Builder feedback = new Feedback_Values.Builder();
             Time.Builder time = new Time.Builder();
+            Console.WriteLine("inside create message type");
             switch (type)
             {
                 // UNDEFINED --------------------------------------------------
@@ -151,7 +152,8 @@ namespace LTH_EGM
 
                 // ALL REQUEST ACK --------------------------------------------------
                 case (int)Header.Types.MessageType.MSGTYPE_ACK_ALL_VALUES:
-
+                    Console.WriteLine($"MSGTYPE_ACK_ALL_VALUES -> switch nbr: {type}");
+                    int marker = 0;
                     //header
                     header.SetMtype(Header.Types.MessageType.MSGTYPE_ACK_ALL_VALUES);
 
@@ -169,7 +171,7 @@ namespace LTH_EGM
                     planned.SetCartesianX(behave.Planned.Cartesian[0]);
                     planned.SetCartesianY(behave.Planned.Cartesian[1]);
                     planned.SetCartesianZ(behave.Planned.Cartesian[2]);
-                    
+                    Console.WriteLine($"marker: {marker++}");
                     //*******************************************************
 
                     //FEEDBACK
@@ -188,6 +190,7 @@ namespace LTH_EGM
                             feedback.SetMotorState(Feedback_Values.Types.MotorStateType.MOTORS_UNDEFINED);
                             break;
                     }
+                    Console.WriteLine($"marker: {marker++}");
                     //set MCI State
                     switch (behave.MciState)
                     {
@@ -207,8 +210,10 @@ namespace LTH_EGM
                             feedback.SetMciState(Feedback_Values.Types.MCIStateType.MCI_UNDEFINED);
                             break;
                     }
+                    Console.WriteLine($"marker: {marker++}");
                     //set MCI convergence met
                     feedback.SetMciConvergenceMet(behave.MciConvergenceMet);
+                    Console.WriteLine($"marker: {marker++}");
                     //set RAPID execution state
                     switch (behave.RapidExceState)
                     {
@@ -224,25 +229,28 @@ namespace LTH_EGM
                             feedback.SetRapidExceState(Feedback_Values.Types.RapidCtrlExecStateType.RAPID_UNDEFINED);
                             break;
                     }
+                    Console.WriteLine($"marker: {marker++}");
                     //set test signals
                     int k = 0;
                     foreach (double signal in behave.TestSignals)
                     {
-                        feedback.SetTestSignals(k, signal);
-                        k++;
+                        //feedback.SetTestSignals(k, signal);
+                        //k++;
                     }
+                    Console.WriteLine($"marker: {marker++}");
                     //set measured force
                     for (int j = 0; j < 6; j++)
                     {
-                        feedback.SetMeasuredForce(j, behave.MesauredForce[j]);
+                        //feedback.SetMeasuredForce(j, behave.MesauredForce[j]);
                     }
-
+                    Console.WriteLine($"marker: {marker++}");
                     //set response
                     response.SetHeader(header);
                     response.SetDesiredPosition(desired);
                     response.SetCurrentPosition(current);
                     response.SetPlannedPosition(planned);
                     response.SetFeedback(feedback);
+                    Console.WriteLine($"marker: {marker++}");
                     break;
             }
         }
@@ -254,12 +262,14 @@ namespace LTH_EGM
             Console.WriteLine("In Server Thread!!!");
             Console.WriteLine(control);
             int type = (int)control.Header.Mtype;
+            Console.WriteLine($"Mtype: {type}");
             switch (type)
             {
                 case (int)Header.Types.MessageType.MSGTYPE_UNDEFINED:
                     // I don't know... I'm never gonna do anything with this... maybe there's value to leaving it in
                     // There's also a reasonable argument to wait for the code review
                     // I might use this as a general error 
+                    Console.WriteLine("MSGTYPE_UNDEFINED");
                     break;
 
                 case (int)Header.Types.MessageType.MSGTYPE_POS_COMMAND:
@@ -309,18 +319,23 @@ namespace LTH_EGM
                     };
                     behave.Desired = pose;
                     CreateMessageType((int)Header.Types.MessageType.MSGTYPE_POS_ACK, behave);
+                    Console.WriteLine("MSGTYPE_POS_COMMAND");
                     break;
 
                 case (int)Header.Types.MessageType.MSGTYPE_REQUEST_POS_VALUES:
                     CreateMessageType((int)Header.Types.MessageType.MSGTYPE_ACK_POS_VALUES, behave);
+                    Console.WriteLine("MSGTYPE_REQUEST_POS_VALUES");
                     break;
 
                 case (int)Header.Types.MessageType.MSGTYPE_REQUEST_FEEDBACK_VALUES:
                     CreateMessageType((int)Header.Types.MessageType.MSGTYPE_ACK_FEEDBACK_VALUES, behave);
+                    Console.WriteLine("MSGTYPE_REQUEST_FEEDBACK_VALUES");
                     break;
 
                 case (int)Header.Types.MessageType.MSGTYPE_REQUEST_ALL_VALUES:
+                    Console.WriteLine("Start MSGTYPE_REQUEST_ALL_VALUES");
                     CreateMessageType((int)Header.Types.MessageType.MSGTYPE_ACK_ALL_VALUES, behave);
+                    Console.WriteLine("MSGTYPE_REQUEST_ALL_VALUES");
                     break;
             }
 
