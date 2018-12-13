@@ -358,8 +358,8 @@ namespace LTH_EGM
                 Debug.WriteLine("RESPONSE:");
                 Debug.WriteLine(message);
                 Debug.WriteLine(" ");
-                Console.WriteLine("message to send back:");
-                Console.WriteLine(message);
+                //Console.WriteLine("message to send back:");
+                //Console.WriteLine(message);
                 message.WriteTo(memoryStream);
                 // send the udp message to the robot
                 int bytesSent = udpServer.Send(memoryStream.ToArray(),
