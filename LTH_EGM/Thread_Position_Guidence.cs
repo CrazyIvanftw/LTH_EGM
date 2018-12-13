@@ -52,7 +52,49 @@ namespace LTH_EGM
 
         public override void CreateMessage(Abstract_Data_Structure behavior)
         {
-            throw new NotImplementedException();
+            EGM_Sensor_Server_Behavior behave = (EGM_Sensor_Server_Behavior)behavior;
+            sensor = EgmSensor.CreateBuilder();
+            // create a header
+            EgmHeader.Builder hdr = new EgmHeader.Builder();
+            hdr.SetSeqno((uint)_seqNbr++)
+                .SetTm((uint)DateTime.Now.Ticks)
+                .SetMtype(EgmHeader.Types.MessageType.MSGTYPE_CORRECTION);
+
+            sensor.SetHeader(hdr);
+
+            // create some sensor data
+            EgmPlanned.Builder planned = new EgmPlanned.Builder();
+            EgmPose.Builder pos = new EgmPose.Builder();
+            EgmQuaternion.Builder pq = new EgmQuaternion.Builder();
+            EgmCartesian.Builder pc = new EgmCartesian.Builder();
+
+            Robot_pose pose = behave.Desired;
+            double[] coordinates;
+            if (pose == null)
+            {
+                coordinates = behave.Feedback.Cartesian;
+            }
+            else
+            {
+                coordinates = pose.Cartesian;
+            }
+            
+            pc.SetX(coordinates[0])
+                .SetY(coordinates[1])
+                .SetZ(coordinates[2]);
+
+            pq.SetU0(1.0)
+                .SetU1(0.0)
+                .SetU2(0.0)
+                .SetU3(0.0);
+
+            pos.SetPos(pc)
+                .SetOrient(pq);
+
+            planned.SetCartesian(pos);  // bind pos object to planned
+            sensor.SetPlanned(planned); // bind planned to sensor object
+
+            return;
         }
 
         public override void ProcessData(UdpClient udpServer, IPEndPoint remoteEP, byte[] data, Abstract_Data_Structure behavior)
@@ -61,15 +103,15 @@ namespace LTH_EGM
             // Deserialize the message
             EgmRobot robot = EgmRobot.CreateBuilder().MergeFrom(data).Build();
             //DebugDisplay($"({robot.FeedBack.Cartesian.Pos.X}, {robot.FeedBack.Cartesian.Pos.Y}, {robot.FeedBack.Cartesian.Pos.Z})");
-            behavior.SetCurrentPose(new double[] {
-                robot.FeedBack.Cartesian.Pos.X,
-                robot.FeedBack.Cartesian.Pos.Y,
-                robot.FeedBack.Cartesian.Pos.Z });
+            //behavior.SetCurrentPose(new double[] {
+            //    robot.FeedBack.Cartesian.Pos.X,
+            //    robot.FeedBack.Cartesian.Pos.Y,
+             //   robot.FeedBack.Cartesian.Pos.Z });
 
-            behavior.SetPlannedPose(new double[] {
-                robot.Planned.Cartesian.Pos.X,
-                robot.Planned.Cartesian.Pos.Y,
-                robot.Planned.Cartesian.Pos.Z });
+           // behavior.SetPlannedPose(new double[] {
+            //    robot.Planned.Cartesian.Pos.X,
+            //    robot.Planned.Cartesian.Pos.Y,
+             //   robot.Planned.Cartesian.Pos.Z });
 
 
             Robot_pose feedback = new Robot_pose();
@@ -77,6 +119,8 @@ namespace LTH_EGM
 
             if (robot.FeedBack.HasJoints)
             {
+                //Debug.WriteLine("-feedback joints-");
+                //Debug.WriteLine(robot.FeedBack.Joints);
                 feedback.Joints = new double[] {
                     robot.FeedBack.Joints.GetJoints(0),
                     robot.FeedBack.Joints.GetJoints(1),
@@ -87,7 +131,8 @@ namespace LTH_EGM
                 };
             }
             
-            Debug.WriteLine("after joints");
+            //Debug.WriteLine("after joints");
+            
             feedback.Cartesian = new double[] {
                 robot.FeedBack.Cartesian.Pos.X,
                 robot.FeedBack.Cartesian.Pos.Y,
@@ -106,6 +151,8 @@ namespace LTH_EGM
             };
             if (robot.FeedBack.HasExternalJoints)
             {
+                //Debug.WriteLine("-feedback external joints-");
+                //Debug.WriteLine(robot.FeedBack.ExternalJoints);
                 feedback.ExternalJoints = new double[]
                 {
                     robot.FeedBack.ExternalJoints.GetJoints(0),
@@ -117,7 +164,7 @@ namespace LTH_EGM
                 };
             }
             
-            Debug.WriteLine("after external joints");
+            //Debug.WriteLine("after external joints");
             feedback.Time = new Int64[]
             {
                 (Int64)robot.FeedBack.Time.Sec,
@@ -126,6 +173,8 @@ namespace LTH_EGM
 
             if (robot.Planned.HasJoints)
             {
+                //Debug.WriteLine("-planned joints-");
+                //Debug.WriteLine(robot.Planned.Joints);
                 planned.Joints = new double[]
                 {
                     robot.Planned.Joints.GetJoints(0),
@@ -157,6 +206,8 @@ namespace LTH_EGM
             };
             if (robot.Planned.HasExternalJoints)
             {
+                //Debug.WriteLine("-planned external joints-");
+                //Debug.WriteLine(robot.Planned.ExternalJoints);
                 planned.ExternalJoints = new double[]
                 {
                     robot.Planned.ExternalJoints.GetJoints(0),
@@ -184,7 +235,7 @@ namespace LTH_EGM
             behave.RapidExceState = (int)robot.RapidExecState.State;
 
             // Create this type of sensor message;
-            CreateMessage(behavior.NextPose());
+            CreateMessage(behavior);
 
             // Send the message
             using (MemoryStream memoryStream = new MemoryStream())

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
@@ -260,6 +261,9 @@ namespace LTH_EGM
             EGM_Sensor_Server_Behavior behave = (EGM_Sensor_Server_Behavior)behavior;
             EGM_Control control = EGM_Control.CreateBuilder().MergeFrom(data).Build();
             Console.WriteLine("In Server Thread!!!");
+            Debug.WriteLine("REQUEST:");
+            Debug.WriteLine(control);
+            Debug.WriteLine(" ");
             Console.WriteLine(control);
             int type = (int)control.Header.Mtype;
             Console.WriteLine($"Mtype: {type}");
@@ -275,15 +279,19 @@ namespace LTH_EGM
                 case (int)Header.Types.MessageType.MSGTYPE_POS_COMMAND:
                     // This is supposed to replace the current desired target with a new desired target
                     Robot_pose pose = new Robot_pose();
-                    pose.Joints = new double[]
+                    if (control.DesiredPosition.HasRobotJoints)
                     {
-                        control.DesiredPosition.RobotJoints.GetJoints_(0),
-                        control.DesiredPosition.RobotJoints.GetJoints_(1),
-                        control.DesiredPosition.RobotJoints.GetJoints_(2),
-                        control.DesiredPosition.RobotJoints.GetJoints_(3),
-                        control.DesiredPosition.RobotJoints.GetJoints_(4),
-                        control.DesiredPosition.RobotJoints.GetJoints_(5)
-                    };
+                        pose.Joints = new double[]
+                        {
+                            control.DesiredPosition.RobotJoints.GetJoints_(0),
+                            control.DesiredPosition.RobotJoints.GetJoints_(1),
+                            control.DesiredPosition.RobotJoints.GetJoints_(2),
+                            control.DesiredPosition.RobotJoints.GetJoints_(3),
+                            control.DesiredPosition.RobotJoints.GetJoints_(4),
+                            control.DesiredPosition.RobotJoints.GetJoints_(5)
+                        };
+                    }
+                    
                     pose.Cartesian = new double[]
                     {
                         control.DesiredPosition.CartesianX,
@@ -303,15 +311,19 @@ namespace LTH_EGM
                         control.DesiredPosition.EulerY,
                         control.DesiredPosition.EulerZ
                     };
-                    pose.ExternalJoints = new double[]
+                    if (control.DesiredPosition.HasExternalJoints)
                     {
-                        control.DesiredPosition.ExternalJoints.GetJoints_(0),
-                        control.DesiredPosition.ExternalJoints.GetJoints_(1),
-                        control.DesiredPosition.ExternalJoints.GetJoints_(2),
-                        control.DesiredPosition.ExternalJoints.GetJoints_(3),
-                        control.DesiredPosition.ExternalJoints.GetJoints_(4),
-                        control.DesiredPosition.ExternalJoints.GetJoints_(5)
-                    };
+                        pose.ExternalJoints = new double[]
+                        {
+                            control.DesiredPosition.ExternalJoints.GetJoints_(0),
+                            control.DesiredPosition.ExternalJoints.GetJoints_(1),
+                            control.DesiredPosition.ExternalJoints.GetJoints_(2),
+                            control.DesiredPosition.ExternalJoints.GetJoints_(3),
+                            control.DesiredPosition.ExternalJoints.GetJoints_(4),
+                            control.DesiredPosition.ExternalJoints.GetJoints_(5)
+                        };
+                    }
+
                     pose.Time = new long[]
                     {
                         (long)control.DesiredPosition.Time.Sec,
@@ -343,6 +355,9 @@ namespace LTH_EGM
             using (MemoryStream memoryStream = new MemoryStream())
             {
                 EGM_Control message = response.Build();
+                Debug.WriteLine("RESPONSE:");
+                Debug.WriteLine(message);
+                Debug.WriteLine(" ");
                 Console.WriteLine("message to send back:");
                 Console.WriteLine(message);
                 message.WriteTo(memoryStream);
