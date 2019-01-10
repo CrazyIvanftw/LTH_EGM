@@ -6,7 +6,7 @@ namespace LTH_EGM
     public class A_Dummy_Server
     {
 
-        Thread_Server thread = new Thread_Server();
+        Thread_Greg_Protocol_Adapter thread = new Thread_Greg_Protocol_Adapter();
         EGM_Sensor_Server_Behavior behavior = new EGM_Sensor_Server_Behavior();
 
         public A_Dummy_Server()

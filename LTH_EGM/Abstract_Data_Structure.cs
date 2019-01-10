@@ -6,7 +6,6 @@ namespace LTH_EGM
 {
     public abstract class Abstract_Data_Structure
     {
-
         public abstract double[] NextPose();
 
         public abstract double[] PlannedPose();

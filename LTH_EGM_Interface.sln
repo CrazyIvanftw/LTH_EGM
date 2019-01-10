@@ -3,15 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LTH_EGM", "LTH_EGM\LTH_EGM.csproj", "{E10AD5DB-C475-44D8-8DD6-92D67CFECD33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LTH_EGM", "LTH_EGM\LTH_EGM.csproj", "{E10AD5DB-C475-44D8-8DD6-92D67CFECD33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_Ex.cs", "Test_Ex.cs\Test_Ex.cs.csproj", "{3CFC6584-F069-4C91-A0C3-0DCAB24AE3F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test_Ex.cs", "Test_Ex.cs\Test_Ex.cs.csproj", "{3CFC6584-F069-4C91-A0C3-0DCAB24AE3F5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server_data_structure_test", "Server_data_structure_test\Server_data_structure_test.csproj", "{87AD73C4-8B48-402F-B712-BCFD423E77BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client_Test", "Client_Test\Client_Test.csproj", "{4A30ED98-5DDF-4AF9-8E73-1857E63B46B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client_Test", "Client_Test\Client_Test.csproj", "{4A30ED98-5DDF-4AF9-8E73-1857E63B46B7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mac_Test", "Mac_Test\Mac_Test.csproj", "{90613246-88ED-4DD8-B693-7AA305D9EF5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Live_Line_Sensor", "..\Live_Line_Sensor\Live_Line_Sensor\Live_Line_Sensor.csproj", "{996EBE59-7EC1-49CD-BDB4-7F09D1F41378}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sensor_Protocol_Test", "..\Live_Line_Sensor\Sensor_Protocol_Test\Sensor_Protocol_Test.csproj", "{EA05FFBE-D73A-4900-B8CA-840D09A58E9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EGM_Smart_Component", "EGM_Smart_Component\EGM_Smart_Component.csproj", "{650BABE1-0F07-4407-A98A-4BA9A2371DA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EGM_Server", "..\EGMController\EGM_Server\EGM_Server.csproj", "{12C684DA-21CC-43CF-951F-251687151DC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Head_Sim", "Head_Sim\Head_Sim.csproj", "{2E531343-8A56-40DF-AF02-44EE5B24A6EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +49,26 @@ Global
 		{90613246-88ED-4DD8-B693-7AA305D9EF5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90613246-88ED-4DD8-B693-7AA305D9EF5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90613246-88ED-4DD8-B693-7AA305D9EF5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{996EBE59-7EC1-49CD-BDB4-7F09D1F41378}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{996EBE59-7EC1-49CD-BDB4-7F09D1F41378}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{996EBE59-7EC1-49CD-BDB4-7F09D1F41378}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{996EBE59-7EC1-49CD-BDB4-7F09D1F41378}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA05FFBE-D73A-4900-B8CA-840D09A58E9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA05FFBE-D73A-4900-B8CA-840D09A58E9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA05FFBE-D73A-4900-B8CA-840D09A58E9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA05FFBE-D73A-4900-B8CA-840D09A58E9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{650BABE1-0F07-4407-A98A-4BA9A2371DA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{650BABE1-0F07-4407-A98A-4BA9A2371DA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{650BABE1-0F07-4407-A98A-4BA9A2371DA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{650BABE1-0F07-4407-A98A-4BA9A2371DA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12C684DA-21CC-43CF-951F-251687151DC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12C684DA-21CC-43CF-951F-251687151DC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12C684DA-21CC-43CF-951F-251687151DC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12C684DA-21CC-43CF-951F-251687151DC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E531343-8A56-40DF-AF02-44EE5B24A6EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E531343-8A56-40DF-AF02-44EE5B24A6EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E531343-8A56-40DF-AF02-44EE5B24A6EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E531343-8A56-40DF-AF02-44EE5B24A6EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

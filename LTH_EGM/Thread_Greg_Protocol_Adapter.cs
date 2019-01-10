@@ -9,12 +9,12 @@ using lth.egm;
 
 namespace LTH_EGM
 {
-    public class Thread_Server : Abstract_Udp_Thread
+    public class Thread_Greg_Protocol_Adapter : Abstract_Udp_Thread
     {
 
         EGM_Control.Builder response;
 
-        public Thread_Server() : base((int)Port_Numbers.SERVER_PORT) { }
+        public Thread_Greg_Protocol_Adapter() : base((int)Port_Numbers.SERVER_PORT) { }
 
         public override void CreateMessage(double[] pose)
         {
@@ -39,7 +39,7 @@ namespace LTH_EGM
             Position_Values.Builder planned = new Position_Values.Builder();
             Feedback_Values.Builder feedback = new Feedback_Values.Builder();
             Time.Builder time = new Time.Builder();
-            Console.WriteLine("inside create message type");
+            //Console.WriteLine("inside create message type");
             switch (type)
             {
                 // UNDEFINED --------------------------------------------------
@@ -153,12 +153,10 @@ namespace LTH_EGM
 
                 // ALL REQUEST ACK --------------------------------------------------
                 case (int)Header.Types.MessageType.MSGTYPE_ACK_ALL_VALUES:
-                    Console.WriteLine($"MSGTYPE_ACK_ALL_VALUES -> switch nbr: {type}");
-                    int marker = 0;
                     //header
                     header.SetMtype(Header.Types.MessageType.MSGTYPE_ACK_ALL_VALUES);
 
-                    //INCOMPLETE -> FLESH OUT ALL OF THIS NONSENSE 
+                    //INCOMPLETE -> FLESH OUT ALL OF THIS 
                     //*******************************************************
                     //desired
                     desired.SetCartesianX(behave.Desired.Cartesian[0]);
@@ -172,7 +170,7 @@ namespace LTH_EGM
                     planned.SetCartesianX(behave.Planned.Cartesian[0]);
                     planned.SetCartesianY(behave.Planned.Cartesian[1]);
                     planned.SetCartesianZ(behave.Planned.Cartesian[2]);
-                    Console.WriteLine($"marker: {marker++}");
+                    //Console.WriteLine($"marker: {marker++}");
                     //*******************************************************
 
                     //FEEDBACK
@@ -191,7 +189,6 @@ namespace LTH_EGM
                             feedback.SetMotorState(Feedback_Values.Types.MotorStateType.MOTORS_UNDEFINED);
                             break;
                     }
-                    Console.WriteLine($"marker: {marker++}");
                     //set MCI State
                     switch (behave.MciState)
                     {
@@ -211,10 +208,9 @@ namespace LTH_EGM
                             feedback.SetMciState(Feedback_Values.Types.MCIStateType.MCI_UNDEFINED);
                             break;
                     }
-                    Console.WriteLine($"marker: {marker++}");
                     //set MCI convergence met
                     feedback.SetMciConvergenceMet(behave.MciConvergenceMet);
-                    Console.WriteLine($"marker: {marker++}");
+
                     //set RAPID execution state
                     switch (behave.RapidExceState)
                     {
@@ -230,28 +226,25 @@ namespace LTH_EGM
                             feedback.SetRapidExceState(Feedback_Values.Types.RapidCtrlExecStateType.RAPID_UNDEFINED);
                             break;
                     }
-                    Console.WriteLine($"marker: {marker++}");
+
                     //set test signals
-                    int k = 0;
-                    foreach (double signal in behave.TestSignals)
-                    {
-                        //feedback.SetTestSignals(k, signal);
-                        //k++;
-                    }
-                    Console.WriteLine($"marker: {marker++}");
+                    //------------Not Implemented by ABB---------------------------
+                    // TEST SIGNALS ALWAYS NULL BECAUSE THEY ARE NOT USES BY EGM. 
+                    // ABB claims that they plan to implement and use those fields 
+                    // in the future, so this is where I would extract the test 
+                    // signals... IF I HAD ANY!
+
                     //set measured force
-                    for (int j = 0; j < 6; j++)
-                    {
-                        //feedback.SetMeasuredForce(j, behave.MesauredForce[j]);
-                    }
-                    Console.WriteLine($"marker: {marker++}");
+                    // Measured force not included by robotstudio's virtual controller.
+                    // Maybe real controllers include it, but I don't know. Happy to help 
+                    // implement this if someone wants to use this on a real robot.
+                    
                     //set response
                     response.SetHeader(header);
                     response.SetDesiredPosition(desired);
                     response.SetCurrentPosition(current);
                     response.SetPlannedPosition(planned);
                     response.SetFeedback(feedback);
-                    Console.WriteLine($"marker: {marker++}");
                     break;
             }
         }
@@ -260,20 +253,20 @@ namespace LTH_EGM
         {
             EGM_Sensor_Server_Behavior behave = (EGM_Sensor_Server_Behavior)behavior;
             EGM_Control control = EGM_Control.CreateBuilder().MergeFrom(data).Build();
-            Console.WriteLine("In Server Thread!!!");
-            Debug.WriteLine("REQUEST:");
-            Debug.WriteLine(control);
-            Debug.WriteLine(" ");
-            Console.WriteLine(control);
+            //Console.WriteLine("In Server Thread!!!");
+            //Debug.WriteLine("REQUEST:");
+            //Debug.WriteLine(control);
+            //Debug.WriteLine(" ");
+            //Console.WriteLine(control);
             int type = (int)control.Header.Mtype;
-            Console.WriteLine($"Mtype: {type}");
+            //Console.WriteLine($"Mtype: {type}");
             switch (type)
             {
                 case (int)Header.Types.MessageType.MSGTYPE_UNDEFINED:
                     // I don't know... I'm never gonna do anything with this... maybe there's value to leaving it in
                     // There's also a reasonable argument to wait for the code review
                     // I might use this as a general error 
-                    Console.WriteLine("MSGTYPE_UNDEFINED");
+                    //Console.WriteLine("MSGTYPE_UNDEFINED");
                     break;
 
                 case (int)Header.Types.MessageType.MSGTYPE_POS_COMMAND:
@@ -331,23 +324,23 @@ namespace LTH_EGM
                     };
                     behave.Desired = pose;
                     CreateMessageType((int)Header.Types.MessageType.MSGTYPE_POS_ACK, behave);
-                    Console.WriteLine("MSGTYPE_POS_COMMAND");
+                    //Console.WriteLine("MSGTYPE_POS_COMMAND");
                     break;
 
                 case (int)Header.Types.MessageType.MSGTYPE_REQUEST_POS_VALUES:
                     CreateMessageType((int)Header.Types.MessageType.MSGTYPE_ACK_POS_VALUES, behave);
-                    Console.WriteLine("MSGTYPE_REQUEST_POS_VALUES");
+                    //Console.WriteLine("MSGTYPE_REQUEST_POS_VALUES");
                     break;
 
                 case (int)Header.Types.MessageType.MSGTYPE_REQUEST_FEEDBACK_VALUES:
                     CreateMessageType((int)Header.Types.MessageType.MSGTYPE_ACK_FEEDBACK_VALUES, behave);
-                    Console.WriteLine("MSGTYPE_REQUEST_FEEDBACK_VALUES");
+                    //Console.WriteLine("MSGTYPE_REQUEST_FEEDBACK_VALUES");
                     break;
 
                 case (int)Header.Types.MessageType.MSGTYPE_REQUEST_ALL_VALUES:
-                    Console.WriteLine("Start MSGTYPE_REQUEST_ALL_VALUES");
+                    //Console.WriteLine("Start MSGTYPE_REQUEST_ALL_VALUES");
                     CreateMessageType((int)Header.Types.MessageType.MSGTYPE_ACK_ALL_VALUES, behave);
-                    Console.WriteLine("MSGTYPE_REQUEST_ALL_VALUES");
+                   // Console.WriteLine("MSGTYPE_REQUEST_ALL_VALUES");
                     break;
             }
 

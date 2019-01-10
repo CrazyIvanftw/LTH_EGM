@@ -17,7 +17,7 @@ namespace LTH_EGM
             behavior = new EGM_Sensor_Server_Behavior();
             pos_stream_thread = new Thread_Position_Stream();
             pos_guide_thread = new Thread_Position_Guidence();
-            interface_thread = new Thread_Server();
+            interface_thread = new Thread_Greg_Protocol_Adapter();
             //path_corr_thread = new Thread_Path_Correction();
 
         }
