@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{650BABE1-0F07-4407-A98A-4BA9A2371DA2}</ProjectGuid>
+    <ProjectGuid>{3951A0F9-A859-4F95-8AC2-6DA732C3FFB1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EGM_Smart_Component</RootNamespace>
-    <AssemblyName>EGM_Smart_Component</AssemblyName>
+    <RootNamespace>start_thread_test</RootNamespace>
+    <AssemblyName>start_thread_test</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -50,35 +50,18 @@
       <HintPath>$(ProgramFiles)\ABB Industrial IT\Robotics IT\SDK\RobotStudio SDK 6.07\ABB.Robotics.RobotStudio.Stations.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Google.ProtocolBuffers, Version=2.4.1.555, Culture=neutral, PublicKeyToken=55f7125234beb589, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.ProtocolBuffers.2.4.1.555\lib\net40\Google.ProtocolBuffers.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.ProtocolBuffers.Serialization, Version=2.4.1.555, Culture=neutral, PublicKeyToken=55f7125234beb589, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.ProtocolBuffers.2.4.1.555\lib\net40\Google.ProtocolBuffers.Serialization.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract_Udp_Thread.cs" />
     <Compile Include="CodeBehind.cs" />
-    <Compile Include="EGM_Udp_Thread_Interface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Thread_Greg_Protocol_Adapter.cs" />
-    <Compile Include="Thread_Position_Guidence.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="EGM_Smart_Component.xml" />
-    <None Include="EGM_Smart_Component.en.xml" />
-    <None Include="EGM_Smart_Component.png" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LTH_EGM\LTH_EGM.csproj">
-      <Project>{E10AD5DB-C475-44D8-8DD6-92D67CFECD33}</Project>
-      <Name>LTH_EGM</Name>
-    </ProjectReference>
+    <None Include="start_thread_test.xml" />
+    <None Include="start_thread_test.en.xml" />
+    <None Include="start_thread_test.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -90,6 +73,6 @@
   -->
   <PropertyGroup>
     <PostBuildEvent>copy /y "$(TargetPath)" "$(ProjectDir)"
-"$(ProgramFiles)\ABB Industrial IT\Robotics IT\RobotStudio 6.07\bin\LibraryCompiler.exe" "$(ProjectDir)\EGM_Smart_Component.xml"</PostBuildEvent>
+"$(ProgramFiles)\ABB Industrial IT\Robotics IT\RobotStudio 6.07\bin\LibraryCompiler.exe" "$(ProjectDir)\start_thread_test.xml"</PostBuildEvent>
   </PropertyGroup>
 </Project>

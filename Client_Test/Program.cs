@@ -16,21 +16,21 @@ namespace Client_Test
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            A_Dummy_Server s = new A_Dummy_Server();
-            Console.WriteLine("Hello Dummy Server!");
-            s.StartServer();
-            Console.WriteLine("Dummy Started!");
+            //A_Dummy_Server s = new A_Dummy_Server();
+            //Console.WriteLine("Hello Dummy Server!");
+            //s.StartServer();
+            //Console.WriteLine("Dummy Started!");
 
-            Console.WriteLine("Press any key to stop server...");
-            Console.ReadKey();
-            s.StopServer();
-            Console.WriteLine("Server stopped...");
-            Console.ReadKey();
+            //Console.WriteLine("Press any key to stop server...");
+            //Console.ReadKey();
+            //s.StopServer();
+            //Console.WriteLine("Server stopped...");
+            //Console.ReadKey();
 
-            //UDPSocket c = new UDPSocket();
-            //c.Client("127.0.0.1", (int)LTH_EGM.Port_Numbers.SERVER_PORT);
+            UDPSocket c = new UDPSocket();
+            c.Client("127.0.0.1", (int)LTH_EGM.Port_Numbers.SERVER_PORT);
             //c.egmInterfaceSend();
-            //c.Send("42!");
+            c.Send("42!");
             //c.gpbSend(42, "The meaning of life, the universe, and everything is...");
             //Packet.Builder packet = Packet.CreateBuilder();//is there a difference?
             //lth.egmTest.Header.Builder header = new lth.egmTest.Header.Builder();//create builder or new builder?

@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
-
+using System.Threading;
 using ABB.Robotics.Math;
 using ABB.Robotics.RobotStudio;
 using ABB.Robotics.RobotStudio.Stations;
-using LTH_EGM;
 
-namespace EGM_Smart_Component
+namespace start_thread_test
 {
     /// <summary>
-    /// Code-behind class for the EGM_Smart_Component Smart Component.
+    /// Code-behind class for the start_thread_test Smart Component.
     /// </summary>
     /// <remarks>
     /// The code-behind class should be seen as a service provider used by the 
@@ -23,9 +24,6 @@ namespace EGM_Smart_Component
     /// </remarks>
     public class CodeBehind : SmartComponentCodeBehind
     {
-        Thread_Position_Guidence egmThread;
-        Thread_Greg_Protocol_Adapter greg_protocol_adapter_thread;
-        EGM_Sensor_Server_Behavior ds;
         /// <summary>
         /// Called when the value of a dynamic property value has changed.
         /// </summary>
@@ -61,33 +59,62 @@ namespace EGM_Smart_Component
 
         public override void OnSimulationStart(SmartComponent component)
         {
-            
             base.OnSimulationStart(component);
-            Debug.WriteLine("Sim-start---------------------------------------------------");
-            // Make new threads
-            egmThread = new Thread_Position_Guidence();
-            greg_protocol_adapter_thread = new Thread_Greg_Protocol_Adapter();
-            Debug.WriteLine("threads made");
-            // Make new data structure
-            ds = new EGM_Sensor_Server_Behavior();
-            Debug.WriteLine("data structure made");
-            // Start Threads
-            egmThread.Start(ds);
-            greg_protocol_adapter_thread.Start(ds);
-            Debug.WriteLine("threads started");
+            Test_thread thread = new Test_thread();
+            thread.Start();
+        }
+    }
+
+    public class Test_thread
+    {
+
+        int portNbr = 8080;
+        private Thread _serverThread = null;
+        private UdpClient _udpServer = null;
+        private bool _exitThread = false;
+        private uint _seqNumber = 0;
+
+        string msg = "this is a message";
+
+        public void ServerStart()
+        {
+            // create an udp client and listen on any address and the port _ipPortNumber
+
+            _udpServer = new UdpClient(portNbr);
+            var remoteEP = new IPEndPoint(IPAddress.Any, portNbr);
+            int nbr = 1;
+
+            while (_exitThread == false)
+            {
+                byte[] data = null;
+                try
+                {
+                    data = _udpServer.Receive(ref remoteEP);
+                    Logger.AddMessage(new LogMessage(Convert.ToString(data)));
+                    nbr += 1;
+                }
+                catch (Exception e)
+                {
+                    Logger.AddMessage(new LogMessage(e.Message));
+                    _exitThread = true;
+                }
+
+
+            }
         }
 
-        public override void OnSimulationStop(SmartComponent component)
+        // Start a thread to listen on inbound messages
+        public void Start()
         {
-            base.OnSimulationStop(component);
-            Debug.WriteLine("Sim-stop---------------------------------------------------");
-            // Stop Threads
-            egmThread.Stop();
-            greg_protocol_adapter_thread.Stop();
-            // Null the threads and data structure
-            egmThread = null;
-            greg_protocol_adapter_thread = null;
-            ds = null;
+            _serverThread = new Thread(new ThreadStart(ServerStart));
+            _serverThread.Start();
+        }
+
+        // Stop and exit thread
+        public void Stop()
+        {
+            _exitThread = true;
+            _serverThread.Abort();
         }
     }
 }
