@@ -223,6 +223,7 @@ namespace LTH_EGM
                 (Int64)robot.Planned.Time.Usec
             };
 
+            behave.TakeMutex(10); //prevent the all race conditions!
             behave.Seqno = robot.Header.Seqno;
             behave.Tm = robot.Header.Tm;
             behave.Mtype = (int)robot.Header.Mtype;
@@ -233,6 +234,7 @@ namespace LTH_EGM
             behave.MciConvergenceMet = robot.MciConvergenceMet;
             behave.TestSignals = robot.TestSignals.SignalsList;
             behave.RapidExceState = (int)robot.RapidExecState.State;
+            behave.GiveMutex();
 
             // Create this type of sensor message;
             CreateMessage(behavior);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 using ABB.Robotics.Math;
@@ -52,11 +53,12 @@ namespace Head_Sim
         /// </remarks>
         public override void OnSimulationStep(SmartComponent component, double simulationTime, double previousTime)
         {
-            double pos = Math.Cos(simulationTime / 10000);
+            double pos = Math.Cos(simulationTime / 2000)/110;
 
             Logger.AddMessage(new LogMessage(pos.ToString()));
 
             Station station = Project.ActiveProject as Station;
+            RsWorkObject workObj = station.ActiveTask.ActiveWorkObject;
 
             Logger.AddMessage(new LogMessage("GOT HERE 1"));
 
@@ -64,21 +66,25 @@ namespace Head_Sim
             {
                 Logger.AddMessage(new LogMessage("GOT HERE 2"));
 
-                if (child.Name == "Head_mechanism")
+                if (child.Name == "Head_test")
                 {
                     Logger.AddMessage(new LogMessage("GOT HERE 3"));
                     Part part = child as Part;
 
                     Logger.AddMessage(new LogMessage("GOT HERE 4"));
-                    Matrix4 origo = Matrix4.Identity;
+                    Matrix4 oldGlobalMatrix = part.Transform.Matrix;
+                    //Transform refTrf = GetRefCoordSysTransforms(part);
+                    //Matrix4 origo = Matrix4.Identity;
                     Matrix4 transform = new Matrix4(new Vector3(0, pos, 0));
-
-                    Logger.AddMessage(new LogMessage("GOT HERE 5"));
-                    part.Transform.SetRelativeTransform(origo, transform);
-                    Logger.AddMessage(new LogMessage("GOT HERE 6"));
+                    Debug.WriteLine(transform);
+                    //Logger.AddMessage(new LogMessage("GOT HERE 5"));
+                    //part.Transform.SetRelativeTransform(origo, transform);
+                    part.Transform.SetRelativeTransform(oldGlobalMatrix, transform);
+                    //Logger.AddMessage(new LogMessage("GOT HERE 6"));
                 }
 
             }
         }
+        
     }
 }

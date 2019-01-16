@@ -322,25 +322,33 @@ namespace LTH_EGM
                         (long)control.DesiredPosition.Time.Sec,
                         (long)control.DesiredPosition.Time.Usec
                     };
+                    behave.TakeMutex(10); //prevent the all race conditions!
                     behave.Desired = pose;
                     CreateMessageType((int)Header.Types.MessageType.MSGTYPE_POS_ACK, behave);
+                    behave.GiveMutex();
                     //Console.WriteLine("MSGTYPE_POS_COMMAND");
                     break;
 
                 case (int)Header.Types.MessageType.MSGTYPE_REQUEST_POS_VALUES:
+                    behave.TakeMutex(10); //prevent the all race conditions!
                     CreateMessageType((int)Header.Types.MessageType.MSGTYPE_ACK_POS_VALUES, behave);
+                    behave.GiveMutex();
                     //Console.WriteLine("MSGTYPE_REQUEST_POS_VALUES");
                     break;
 
                 case (int)Header.Types.MessageType.MSGTYPE_REQUEST_FEEDBACK_VALUES:
+                    behave.TakeMutex(10); //prevent the all race conditions!
                     CreateMessageType((int)Header.Types.MessageType.MSGTYPE_ACK_FEEDBACK_VALUES, behave);
+                    behave.GiveMutex();
                     //Console.WriteLine("MSGTYPE_REQUEST_FEEDBACK_VALUES");
                     break;
 
                 case (int)Header.Types.MessageType.MSGTYPE_REQUEST_ALL_VALUES:
                     //Console.WriteLine("Start MSGTYPE_REQUEST_ALL_VALUES");
+                    behave.TakeMutex(10); //prevent the all race conditions!
                     CreateMessageType((int)Header.Types.MessageType.MSGTYPE_ACK_ALL_VALUES, behave);
-                   // Console.WriteLine("MSGTYPE_REQUEST_ALL_VALUES");
+                    behave.GiveMutex();
+                    // Console.WriteLine("MSGTYPE_REQUEST_ALL_VALUES");
                     break;
             }
 

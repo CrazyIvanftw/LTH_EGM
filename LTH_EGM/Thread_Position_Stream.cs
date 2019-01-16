@@ -143,6 +143,7 @@ namespace LTH_EGM
                 (Int64)robot.Planned.Time.Usec
             };
 
+            behave.TakeMutex(10); //prevent the all race conditions!
             behave.Seqno = robot.Header.Seqno;
             behave.Tm = robot.Header.Tm;
             behave.Mtype = (int)robot.Header.Mtype;
@@ -160,6 +161,7 @@ namespace LTH_EGM
                 behave.MesauredForce[i] = force;
                 i++;
             }
+            behave.GiveMutex();
             
 
 
