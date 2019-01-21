@@ -224,6 +224,16 @@ namespace LTH_EGM
             };
 
             behave.TakeMutex(10); //prevent the all race conditions!
+            if(_seqNbr == 0)
+            {
+                Robot_pose desired = new Robot_pose();
+                desired.Cartesian = new double[] {
+                robot.FeedBack.Cartesian.Pos.X,
+                robot.FeedBack.Cartesian.Pos.Y,
+                robot.FeedBack.Cartesian.Pos.Z
+                };
+                behave.Desired = desired;
+            }
             behave.Seqno = robot.Header.Seqno;
             behave.Tm = robot.Header.Tm;
             behave.Mtype = (int)robot.Header.Mtype;

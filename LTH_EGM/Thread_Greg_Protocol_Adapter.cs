@@ -44,9 +44,10 @@ namespace LTH_EGM
             {
                 // UNDEFINED --------------------------------------------------
                 case (int)Header.Types.MessageType.MSGTYPE_UNDEFINED:
-                    // I don't know... I'm never gonna do anything with this... maybe there's value to leaving it in
-                    // There's also a reasonable argument to wait for the code review
-                    // I might use this as a general error 
+                    // For the moment, this is going to function as a 'ping'. If an undefined message comes in, this will return an undefined message.
+                    // It could be used to check if the server is up and running.
+                    header.SetMtype(Header.Types.MessageType.MSGTYPE_UNDEFINED);
+                    response.SetHeader(header);
                     break;
 
                 // POSITION COMMAND ACK --------------------------------------------------
@@ -153,6 +154,7 @@ namespace LTH_EGM
 
                 // ALL REQUEST ACK --------------------------------------------------
                 case (int)Header.Types.MessageType.MSGTYPE_ACK_ALL_VALUES:
+                    Debug.WriteLine("MSGTYPE_ACK_ALL_VALUES STARTED");
                     //header
                     header.SetMtype(Header.Types.MessageType.MSGTYPE_ACK_ALL_VALUES);
 
@@ -162,6 +164,10 @@ namespace LTH_EGM
                     desired.SetCartesianX(behave.Desired.Cartesian[0]);
                     desired.SetCartesianY(behave.Desired.Cartesian[1]);
                     desired.SetCartesianZ(behave.Desired.Cartesian[2]);
+                    //DUMMY VALUES
+                    //desired.SetCartesianX(1.0);
+                    //desired.SetCartesianY(2.0);
+                    //desired.SetCartesianZ(3.0);
                     //current
                     current.SetCartesianX(behave.Feedback.Cartesian[0]);
                     current.SetCartesianY(behave.Feedback.Cartesian[1]);
@@ -263,10 +269,11 @@ namespace LTH_EGM
             switch (type)
             {
                 case (int)Header.Types.MessageType.MSGTYPE_UNDEFINED:
-                    // I don't know... I'm never gonna do anything with this... maybe there's value to leaving it in
-                    // There's also a reasonable argument to wait for the code review
-                    // I might use this as a general error 
+                    // For the moment, Undefined messages are used as a 'ping'. If an undefined message comes in, return an undefined message to source.
                     //Console.WriteLine("MSGTYPE_UNDEFINED");
+                    behave.TakeMutex(10); //prevent the all race conditions!
+                    CreateMessageType((int)Header.Types.MessageType.MSGTYPE_UNDEFINED, behave);
+                    behave.GiveMutex();
                     break;
 
                 case (int)Header.Types.MessageType.MSGTYPE_POS_COMMAND:
@@ -345,6 +352,7 @@ namespace LTH_EGM
 
                 case (int)Header.Types.MessageType.MSGTYPE_REQUEST_ALL_VALUES:
                     //Console.WriteLine("Start MSGTYPE_REQUEST_ALL_VALUES");
+                    Debug.WriteLine("MSGTYPE_REQUEST_ALL_VALUES RECEIVED");
                     behave.TakeMutex(10); //prevent the all race conditions!
                     CreateMessageType((int)Header.Types.MessageType.MSGTYPE_ACK_ALL_VALUES, behave);
                     behave.GiveMutex();

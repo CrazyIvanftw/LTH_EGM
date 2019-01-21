@@ -55,28 +55,28 @@ namespace Head_Sim
         {
             double pos = Math.Cos(simulationTime / 2000)/110;
 
-            Logger.AddMessage(new LogMessage(pos.ToString()));
+            //Logger.AddMessage(new LogMessage(pos.ToString()));
 
             Station station = Project.ActiveProject as Station;
             RsWorkObject workObj = station.ActiveTask.ActiveWorkObject;
 
-            Logger.AddMessage(new LogMessage("GOT HERE 1"));
+            //Logger.AddMessage(new LogMessage("GOT HERE 1"));
 
             foreach (var child in station.Children)
             {
-                Logger.AddMessage(new LogMessage("GOT HERE 2"));
+                //Logger.AddMessage(new LogMessage("GOT HERE 2"));
 
                 if (child.Name == "Head_test")
                 {
-                    Logger.AddMessage(new LogMessage("GOT HERE 3"));
+                    //Logger.AddMessage(new LogMessage("GOT HERE 3"));
                     Part part = child as Part;
 
-                    Logger.AddMessage(new LogMessage("GOT HERE 4"));
+                    //Logger.AddMessage(new LogMessage("GOT HERE 4"));
                     Matrix4 oldGlobalMatrix = part.Transform.Matrix;
                     //Transform refTrf = GetRefCoordSysTransforms(part);
                     //Matrix4 origo = Matrix4.Identity;
                     Matrix4 transform = new Matrix4(new Vector3(0, pos, 0));
-                    Debug.WriteLine(transform);
+                    //Debug.WriteLine(transform);
                     //Logger.AddMessage(new LogMessage("GOT HERE 5"));
                     //part.Transform.SetRelativeTransform(origo, transform);
                     part.Transform.SetRelativeTransform(oldGlobalMatrix, transform);
