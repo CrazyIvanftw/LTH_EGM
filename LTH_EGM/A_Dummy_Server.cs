@@ -40,7 +40,7 @@ namespace LTH_EGM
 
         public void StartServer()
         {
-            thread.Start(behavior);
+            thread.StartTryFetch(behavior);
         }
 
         public void StopServer()

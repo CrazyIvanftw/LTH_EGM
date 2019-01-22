@@ -10,13 +10,13 @@ namespace LTH_EGM
 {
     interface EGM_Udp_Thread_Interface
     {
-        void ThreadStart(Abstract_Data_Structure behavior);
+        void ThreadStartTryFetch(Abstract_Data_Structure behavior);
 
         void DebugDisplay(string s);
 
         void ProcessData(UdpClient udpServer, IPEndPoint remoteEP, byte[] data, Abstract_Data_Structure behavior);
 
-        void Start(Abstract_Data_Structure behavior);
+        void StartTryFetch(Abstract_Data_Structure behavior);
 
         void Stop();
     }

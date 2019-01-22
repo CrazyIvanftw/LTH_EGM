@@ -35,10 +35,17 @@ namespace LTH_EGM
 
         public abstract void ProcessData(UdpClient udpServer, IPEndPoint remoteEP, byte[] data, Abstract_Data_Structure behavior);
 
-        public void Start(Abstract_Data_Structure behavior)
+        public void StartTryFetch(Abstract_Data_Structure behavior)
         {
             _exitThread = false;
-            _thread = new Thread(() => ThreadStart(behavior));
+            _thread = new Thread(() => ThreadStartTryFetch(behavior));
+            _thread.Start();
+        }
+
+        public void StartDoFetch(Abstract_Data_Structure behavior)
+        {
+            _exitThread = false;
+            _thread = new Thread(() => ThreadStartDoFetch(behavior));
             _thread.Start();
         }
 
@@ -48,7 +55,7 @@ namespace LTH_EGM
             _thread = null;
         }
 
-        public void ThreadStart(Abstract_Data_Structure behavior)
+        public void ThreadStartTryFetch(Abstract_Data_Structure behavior)
         {
             _seqNbr = 0;
             int timeout = 0;
@@ -80,6 +87,31 @@ namespace LTH_EGM
                 }
                 Thread.Sleep(10);
                 timeout++;
+            }
+        }
+
+        public void ThreadStartDoFetch(Abstract_Data_Structure behavior)
+        {
+            _seqNbr = 0;
+            UdpClient udpServer = new UdpClient(_portNbr);
+            IPEndPoint remoteEP = new IPEndPoint(IPAddress.Any, _portNbr);
+            while (!_exitThread)
+            {
+                byte[] data = null;
+                try
+                {
+                    data = udpServer.Receive(ref remoteEP);
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e);
+                }
+                
+                
+                if (data != null)
+                {
+                    ProcessData(udpServer, remoteEP, data, behavior);
+                }
             }
         }
 

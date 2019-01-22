@@ -278,6 +278,7 @@ namespace LTH_EGM
 
                 case (int)Header.Types.MessageType.MSGTYPE_POS_COMMAND:
                     // This is supposed to replace the current desired target with a new desired target
+                    Debug.WriteLine("MSGTYPE_POS_COMMAND");
                     Robot_pose pose = new Robot_pose();
                     if (control.DesiredPosition.HasRobotJoints)
                     {
@@ -337,24 +338,25 @@ namespace LTH_EGM
                     break;
 
                 case (int)Header.Types.MessageType.MSGTYPE_REQUEST_POS_VALUES:
-                    behave.TakeMutex(10); //prevent the all race conditions!
+                    //behave.TakeMutex(10); //prevent the all race conditions!
                     CreateMessageType((int)Header.Types.MessageType.MSGTYPE_ACK_POS_VALUES, behave);
-                    behave.GiveMutex();
+                    //behave.GiveMutex();
                     //Console.WriteLine("MSGTYPE_REQUEST_POS_VALUES");
                     break;
 
                 case (int)Header.Types.MessageType.MSGTYPE_REQUEST_FEEDBACK_VALUES:
-                    behave.TakeMutex(10); //prevent the all race conditions!
+                    //behave.TakeMutex(10); //prevent the all race conditions!
                     CreateMessageType((int)Header.Types.MessageType.MSGTYPE_ACK_FEEDBACK_VALUES, behave);
-                    behave.GiveMutex();
+                    //behave.GiveMutex();
                     //Console.WriteLine("MSGTYPE_REQUEST_FEEDBACK_VALUES");
                     break;
 
                 case (int)Header.Types.MessageType.MSGTYPE_REQUEST_ALL_VALUES:
                     //Console.WriteLine("Start MSGTYPE_REQUEST_ALL_VALUES");
                     Debug.WriteLine("MSGTYPE_REQUEST_ALL_VALUES RECEIVED");
-                    behave.TakeMutex(10); //prevent the all race conditions!
+                    //behave.TakeMutex(10); //prevent the all race conditions!
                     CreateMessageType((int)Header.Types.MessageType.MSGTYPE_ACK_ALL_VALUES, behave);
+                    //
                     behave.GiveMutex();
                     // Console.WriteLine("MSGTYPE_REQUEST_ALL_VALUES");
                     break;

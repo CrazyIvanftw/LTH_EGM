@@ -72,8 +72,8 @@ namespace EGM_Smart_Component
             ds = new EGM_Sensor_Server_Behavior();
             Debug.WriteLine("data structure made");
             // Start Threads
-            egmThread.Start(ds);
-            greg_protocol_adapter_thread.Start(ds);
+            egmThread.StartTryFetch(ds);
+            greg_protocol_adapter_thread.StartTryFetch(ds);
             Debug.WriteLine("threads started");
         }
 

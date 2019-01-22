@@ -53,7 +53,7 @@ namespace Head_Sim
         /// </remarks>
         public override void OnSimulationStep(SmartComponent component, double simulationTime, double previousTime)
         {
-            double pos = Math.Cos(simulationTime / 2000)/110;
+            double pos = Math.Cos(simulationTime / 2000)/150;
 
             //Logger.AddMessage(new LogMessage(pos.ToString()));
 

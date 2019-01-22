@@ -70,7 +70,7 @@ namespace LTH_EGM
 
             Robot_pose pose = behave.Desired;
             double[] coordinates;
-            if (pose == null)
+            if (pose.Cartesian[0] == 0.0 && pose.Cartesian[1] == 1.0 && pose.Cartesian[2] == 2.0)
             {
                 coordinates = behave.Feedback.Cartesian;
             }
@@ -99,19 +99,13 @@ namespace LTH_EGM
 
         public override void ProcessData(UdpClient udpServer, IPEndPoint remoteEP, byte[] data, Abstract_Data_Structure behavior)
         {
+            Debug.WriteLine("--------------------------POS GUIDE THREAD--------------------------");
             EGM_Sensor_Server_Behavior behave = (EGM_Sensor_Server_Behavior)behavior;
             // Deserialize the message
             EgmRobot robot = EgmRobot.CreateBuilder().MergeFrom(data).Build();
-            //DebugDisplay($"({robot.FeedBack.Cartesian.Pos.X}, {robot.FeedBack.Cartesian.Pos.Y}, {robot.FeedBack.Cartesian.Pos.Z})");
-            //behavior.SetCurrentPose(new double[] {
-            //    robot.FeedBack.Cartesian.Pos.X,
-            //    robot.FeedBack.Cartesian.Pos.Y,
-             //   robot.FeedBack.Cartesian.Pos.Z });
-
-           // behavior.SetPlannedPose(new double[] {
-            //    robot.Planned.Cartesian.Pos.X,
-            //    robot.Planned.Cartesian.Pos.Y,
-             //   robot.Planned.Cartesian.Pos.Z });
+            Debug.WriteLine("--------------------------EGM INBOUND--------------------------");
+            Debug.WriteLine(robot);
+            Debug.WriteLine("--------------------------EGM INBOUND--------------------------");
 
 
             Robot_pose feedback = new Robot_pose();
@@ -226,6 +220,7 @@ namespace LTH_EGM
             behave.TakeMutex(10); //prevent the all race conditions!
             if(_seqNbr == 0)
             {
+                Debug.WriteLine("--------------------------EGM.PROTO MESSAGE--------------------------");
                 Robot_pose desired = new Robot_pose();
                 desired.Cartesian = new double[] {
                 robot.FeedBack.Cartesian.Pos.X,
@@ -253,6 +248,9 @@ namespace LTH_EGM
             using (MemoryStream memoryStream = new MemoryStream())
             {
                 EgmSensor sensorMessage = sensor.Build();
+                Debug.WriteLine("--------------------------EGM.PROTO MESSAGE--------------------------");
+                Debug.WriteLine(sensorMessage);
+                Debug.WriteLine("--------------------------EGM.PROTO MESSAGE--------------------------");
                 sensorMessage.WriteTo(memoryStream);
                 // send the udp message to the robot
                 int bytesSent = udpServer.Send(memoryStream.ToArray(),

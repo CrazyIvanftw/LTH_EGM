@@ -48,7 +48,32 @@ namespace LTH_EGM
 
         public EGM_Sensor_Server_Behavior()
         {
-            
+            // Populate the data structure with dummy values so there isn't an accidental crash if any calls are made before the
+            // position guidace thread can populate it with real values.
+            Robot_pose dummyPose = new Robot_pose();
+            dummyPose.Cartesian = new double[] { 0, 1, 2 };
+            dummyPose.Quarternion = new double[] { 0, 1, 2, 3 };
+            dummyPose.Euler = new double[] { 0, 1, 2 };
+            dummyPose.ExternalJoints = new double[] { 0, 1, 2, 3, 4, 5 };
+            dummyPose.Joints = new double[] { 0, 1, 2, 3, 4, 5 };
+            dummyPose.Time = new long[] { 0, 1 };
+            Desired = dummyPose;
+            Feedback = dummyPose;
+            Planned = dummyPose;
+            MciState = (int)abb.egm.EgmMCIState.Types.MCIStateType.MCI_ERROR;
+            MciConvergenceMet = false;
+            MotorState = (int)abb.egm.EgmMotorState.Types.MotorStateType.MOTORS_UNDEFINED;
+            RapidExceState = (int)abb.egm.EgmRapidCtrlExecState.Types.RapidCtrlExecStateType.RAPID_UNDEFINED;
+            Seqno = 0;
+            Tm = 0;
+            Mtype = 0;
+            List<double> list = new List<double>();
+            for (int i = 0; i < 6; i++)
+            {
+                list.Add(i);
+            }
+            TestSignals = list;
+            MesauredForce = new double[] { 0, 1, 2, 3, 4, 5 };
         }
 
         public string PrintOut()
