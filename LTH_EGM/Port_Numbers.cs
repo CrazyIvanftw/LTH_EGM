@@ -11,6 +11,7 @@ namespace LTH_EGM
         PATH_CORR_PORT = 6512,
         SERVER_PORT = 8080,
         CONTROLLER_PORT = 8081,
-        SENSOR_PORT = 8082
+        SENSOR_PORT = 8082,
+        TEST_PORT = 12345
     }
 }

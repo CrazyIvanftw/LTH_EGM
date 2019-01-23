@@ -37,7 +37,7 @@ namespace LTH_EGM
         }
         
 
-        public override double[] NextPose()
+        public double[] NextPose()
         {
             Console.WriteLine($"{pathCounter}, {path.Count}");
 
@@ -62,26 +62,6 @@ namespace LTH_EGM
             }
             return np;
             
-        }
-
-        public override double[] PlannedPose()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void SetCurrentPose(double[] current)
-        {
-            cp = current;
-        }
-
-        public override void SetPlannedPose(double[] planned)
-        {
-            pp = planned;
-        }
-
-        public override void SetNextPose(double[] next)
-        {
-            np = next;
         }
 
 

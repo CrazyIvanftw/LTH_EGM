@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LTH_EGM
 {
-    public class EGM_Sensor_Server_Behavior : Abstract_Data_Structure
+    public class EGM_Sensor_Server_Data_Structure : Abstract_Data_Structure
     {
 
         // Header
@@ -30,6 +30,14 @@ namespace LTH_EGM
         //Measured Force
         private double[] mesauredForce;
 
+        //Sensor Data
+        private double[] sensedPoint;
+        private double[] start;
+        private double[] end;
+        private double radius;
+        private string sensedPart;
+        private UInt32 sensorID;
+
         public uint Seqno { get => seqno; set => seqno = value; }
         public uint Tm { get => tm; set => tm = value; }
         public int Mtype { get => mtype; set => mtype = value; }
@@ -42,11 +50,14 @@ namespace LTH_EGM
         public double[] MesauredForce { get => mesauredForce; set => mesauredForce = value; }
         public IList<double> TestSignals { get => testSignals; set => testSignals = value; }
         public Robot_pose Desired { get => desired; set => desired = value; }
+        public uint SensorID { get => sensorID; set => sensorID = value; }
+        public string SensedPart { get => sensedPart; set => sensedPart = value; }
+        public double Radius { get => radius; set => radius = value; }
+        public double[] End { get => end; set => end = value; }
+        public double[] Start { get => start; set => start = value; }
+        public double[] SensedPoint { get => sensedPoint; set => sensedPoint = value; }
 
-        
-        
-
-        public EGM_Sensor_Server_Behavior()
+        public EGM_Sensor_Server_Data_Structure()
         {
             // Populate the data structure with dummy values so there isn't an accidental crash if any calls are made before the
             // position guidace thread can populate it with real values.
@@ -74,34 +85,17 @@ namespace LTH_EGM
             }
             TestSignals = list;
             MesauredForce = new double[] { 0, 1, 2, 3, 4, 5 };
+
+            //Make dummy values for sensed point
+            SensedPoint = new double[]
+            {
+                0.0,
+                0.0,
+                0.0
+            };
         }
 
         public string PrintOut()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override double[] NextPose()
-        {
-            throw new NotImplementedException();
-        }
-        
-        public override double[] PlannedPose()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void SetCurrentPose(double[] current)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void SetPlannedPose(double[] planned)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void SetNextPose(double[] next)
         {
             throw new NotImplementedException();
         }

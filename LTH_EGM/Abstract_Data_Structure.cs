@@ -9,7 +9,7 @@ namespace LTH_EGM
     {
 
         private static Mutex mutex = new Mutex();
-        
+
         public void TakeMutex(int millisecond_timeout)
         {
             mutex.WaitOne(millisecond_timeout);
@@ -19,16 +19,6 @@ namespace LTH_EGM
         {
             mutex.ReleaseMutex();
         }
-
-        public abstract double[] NextPose();
-
-        public abstract double[] PlannedPose();
-
-        public abstract void SetNextPose(double[] next);
-
-        public abstract void SetCurrentPose(double[] next);
-
-        public abstract void SetPlannedPose(double[] next);
         
     }
 }

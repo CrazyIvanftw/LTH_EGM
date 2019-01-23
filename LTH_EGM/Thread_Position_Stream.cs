@@ -13,41 +13,6 @@ namespace LTH_EGM
 
         public Thread_Position_Stream() : base((int)Port_Numbers.POS_STREAM_PORT) { }
 
-        public override void CreateMessage(double[] pose)
-        {
-            sensor = EgmSensor.CreateBuilder();
-            // create a header
-            EgmHeader.Builder hdr = new EgmHeader.Builder();
-            hdr.SetSeqno((uint)_seqNbr++)
-                .SetTm((uint)DateTime.Now.Ticks)
-                .SetMtype(EgmHeader.Types.MessageType.MSGTYPE_CORRECTION);
-
-            sensor.SetHeader(hdr);
-
-            // create some sensor data
-            EgmPlanned.Builder planned = new EgmPlanned.Builder();
-            EgmPose.Builder pos = new EgmPose.Builder();
-            EgmQuaternion.Builder pq = new EgmQuaternion.Builder();
-            EgmCartesian.Builder pc = new EgmCartesian.Builder();
-
-            pc.SetX(pose[0])
-                .SetY(pose[1])
-                .SetZ(pose[2]);
-
-            pq.SetU0(1.0)
-                .SetU1(0.0)
-                .SetU2(0.0)
-                .SetU3(0.0);
-
-            pos.SetPos(pc)
-                .SetOrient(pq);
-
-            planned.SetCartesian(pos);  // bind pos object to planned
-            sensor.SetPlanned(planned); // bind planned to sensor object
-
-            return;
-        }
-
         public override void CreateMessage(Abstract_Data_Structure behavior)
         {
             throw new NotImplementedException();
@@ -55,7 +20,7 @@ namespace LTH_EGM
 
         public override void ProcessData(UdpClient udpServer, IPEndPoint remoteEP, byte[] data, Abstract_Data_Structure behavior)
         {
-            EGM_Sensor_Server_Behavior behave = (EGM_Sensor_Server_Behavior)behavior;
+            EGM_Sensor_Server_Data_Structure behave = (EGM_Sensor_Server_Data_Structure)behavior;
             // Deserialize the message
             EgmRobot robot = EgmRobot.CreateBuilder().MergeFrom(data).Build();
             //DebugDisplay($"({robot.FeedBack.Cartesian.Pos.X}, {robot.FeedBack.Cartesian.Pos.Y}, {robot.FeedBack.Cartesian.Pos.Z})");
@@ -166,7 +131,7 @@ namespace LTH_EGM
 
 
             // Create this type of sensor message;
-            CreateMessage(behavior.NextPose());
+            CreateMessage(behavior);
 
             // Send the message
             using (MemoryStream memoryStream = new MemoryStream())

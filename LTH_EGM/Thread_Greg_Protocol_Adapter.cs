@@ -16,12 +16,6 @@ namespace LTH_EGM
 
         public Thread_Greg_Protocol_Adapter() : base((int)Port_Numbers.SERVER_PORT) { }
 
-        public override void CreateMessage(double[] pose)
-        {
-            EGM_Control.Builder response = EGM_Control.CreateBuilder();
-            Header.Builder header = new Header.Builder();
-        }
-
         public override void CreateMessage(Abstract_Data_Structure behavior)
         {
             response = EGM_Control.CreateBuilder();
@@ -31,7 +25,7 @@ namespace LTH_EGM
 
         public void CreateMessageType(int type, Abstract_Data_Structure behavior)
         {
-            EGM_Sensor_Server_Behavior behave = (EGM_Sensor_Server_Behavior)behavior;
+            EGM_Sensor_Server_Data_Structure behave = (EGM_Sensor_Server_Data_Structure)behavior;
             response = EGM_Control.CreateBuilder();
             Header.Builder header = new Header.Builder();
             Position_Values.Builder desired = new Position_Values.Builder();
@@ -257,7 +251,7 @@ namespace LTH_EGM
 
         public override void ProcessData(UdpClient udpServer, IPEndPoint remoteEP, byte[] data, Abstract_Data_Structure behavior)
         {
-            EGM_Sensor_Server_Behavior behave = (EGM_Sensor_Server_Behavior)behavior;
+            EGM_Sensor_Server_Data_Structure monitor = (EGM_Sensor_Server_Data_Structure)behavior;
             EGM_Control control = EGM_Control.CreateBuilder().MergeFrom(data).Build();
             //Console.WriteLine("In Server Thread!!!");
             //Debug.WriteLine("REQUEST:");
@@ -271,9 +265,9 @@ namespace LTH_EGM
                 case (int)Header.Types.MessageType.MSGTYPE_UNDEFINED:
                     // For the moment, Undefined messages are used as a 'ping'. If an undefined message comes in, return an undefined message to source.
                     //Console.WriteLine("MSGTYPE_UNDEFINED");
-                    behave.TakeMutex(10); //prevent the all race conditions!
-                    CreateMessageType((int)Header.Types.MessageType.MSGTYPE_UNDEFINED, behave);
-                    behave.GiveMutex();
+                    //behave.TakeMutex(10); //prevent the all race conditions!
+                    CreateMessageType((int)Header.Types.MessageType.MSGTYPE_UNDEFINED, monitor);
+                    //behave.GiveMutex();
                     break;
 
                 case (int)Header.Types.MessageType.MSGTYPE_POS_COMMAND:
@@ -330,23 +324,23 @@ namespace LTH_EGM
                         (long)control.DesiredPosition.Time.Sec,
                         (long)control.DesiredPosition.Time.Usec
                     };
-                    behave.TakeMutex(10); //prevent the all race conditions!
-                    behave.Desired = pose;
-                    CreateMessageType((int)Header.Types.MessageType.MSGTYPE_POS_ACK, behave);
-                    behave.GiveMutex();
+                    //behave.TakeMutex(10); //prevent the all race conditions!
+                    monitor.Desired = pose;
+                    CreateMessageType((int)Header.Types.MessageType.MSGTYPE_POS_ACK, monitor);
+                    //behave.GiveMutex();
                     //Console.WriteLine("MSGTYPE_POS_COMMAND");
                     break;
 
                 case (int)Header.Types.MessageType.MSGTYPE_REQUEST_POS_VALUES:
                     //behave.TakeMutex(10); //prevent the all race conditions!
-                    CreateMessageType((int)Header.Types.MessageType.MSGTYPE_ACK_POS_VALUES, behave);
+                    CreateMessageType((int)Header.Types.MessageType.MSGTYPE_ACK_POS_VALUES, monitor);
                     //behave.GiveMutex();
                     //Console.WriteLine("MSGTYPE_REQUEST_POS_VALUES");
                     break;
 
                 case (int)Header.Types.MessageType.MSGTYPE_REQUEST_FEEDBACK_VALUES:
                     //behave.TakeMutex(10); //prevent the all race conditions!
-                    CreateMessageType((int)Header.Types.MessageType.MSGTYPE_ACK_FEEDBACK_VALUES, behave);
+                    CreateMessageType((int)Header.Types.MessageType.MSGTYPE_ACK_FEEDBACK_VALUES, monitor);
                     //behave.GiveMutex();
                     //Console.WriteLine("MSGTYPE_REQUEST_FEEDBACK_VALUES");
                     break;
@@ -355,9 +349,9 @@ namespace LTH_EGM
                     //Console.WriteLine("Start MSGTYPE_REQUEST_ALL_VALUES");
                     Debug.WriteLine("MSGTYPE_REQUEST_ALL_VALUES RECEIVED");
                     //behave.TakeMutex(10); //prevent the all race conditions!
-                    CreateMessageType((int)Header.Types.MessageType.MSGTYPE_ACK_ALL_VALUES, behave);
+                    CreateMessageType((int)Header.Types.MessageType.MSGTYPE_ACK_ALL_VALUES, monitor);
                     //
-                    behave.GiveMutex();
+                    monitor.GiveMutex();
                     // Console.WriteLine("MSGTYPE_REQUEST_ALL_VALUES");
                     break;
             }

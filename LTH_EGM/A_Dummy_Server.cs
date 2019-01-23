@@ -7,7 +7,7 @@ namespace LTH_EGM
     {
 
         Thread_Greg_Protocol_Adapter thread = new Thread_Greg_Protocol_Adapter();
-        EGM_Sensor_Server_Behavior behavior = new EGM_Sensor_Server_Behavior();
+        EGM_Sensor_Server_Data_Structure behavior = new EGM_Sensor_Server_Data_Structure();
 
         public A_Dummy_Server()
         {

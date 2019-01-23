@@ -10,11 +10,11 @@ namespace LTH_EGM
         private Abstract_Udp_Thread pos_guide_thread;
         //private Abstract_Udp_Thread path_corr_thread;
         private Abstract_Udp_Thread interface_thread;
-        private EGM_Sensor_Server_Behavior behavior;
+        private EGM_Sensor_Server_Data_Structure behavior;
 
         public EGM_Sensor_Server()
         {
-            behavior = new EGM_Sensor_Server_Behavior();
+            behavior = new EGM_Sensor_Server_Data_Structure();
             pos_stream_thread = new Thread_Position_Stream();
             pos_guide_thread = new Thread_Position_Guidence();
             interface_thread = new Thread_Greg_Protocol_Adapter();

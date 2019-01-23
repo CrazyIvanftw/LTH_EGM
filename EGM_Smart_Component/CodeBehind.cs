@@ -25,7 +25,7 @@ namespace EGM_Smart_Component
     {
         Thread_Position_Guidence egmThread;
         Thread_Greg_Protocol_Adapter greg_protocol_adapter_thread;
-        EGM_Sensor_Server_Behavior ds;
+        EGM_Sensor_Server_Data_Structure ds;
         /// <summary>
         /// Called when the value of a dynamic property value has changed.
         /// </summary>
@@ -69,7 +69,7 @@ namespace EGM_Smart_Component
             greg_protocol_adapter_thread = new Thread_Greg_Protocol_Adapter();
             Debug.WriteLine("threads made");
             // Make new data structure
-            ds = new EGM_Sensor_Server_Behavior();
+            ds = new EGM_Sensor_Server_Data_Structure();
             Debug.WriteLine("data structure made");
             // Start Threads
             egmThread.StartTryFetch(ds);

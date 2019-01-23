@@ -29,8 +29,6 @@ namespace LTH_EGM
             Debug.WriteLine("pos stream ->" + s);
         }
 
-        public abstract void CreateMessage(double[] pose);
-
         public abstract void CreateMessage(Abstract_Data_Structure behavior);
 
         public abstract void ProcessData(UdpClient udpServer, IPEndPoint remoteEP, byte[] data, Abstract_Data_Structure behavior);
