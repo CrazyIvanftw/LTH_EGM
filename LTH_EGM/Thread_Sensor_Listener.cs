@@ -24,9 +24,9 @@ namespace LTH_EGM
             EGM_Sensor_Server_Data_Structure monitor = (EGM_Sensor_Server_Data_Structure)behavior;
             LineSensor state = LineSensor.CreateBuilder().MergeFrom(data).Build();
 
-            if(state.SensorID == 1)
+            if(state.SensorID == 42)
             {
-                //Debug.WriteLine(state);
+                Debug.WriteLine(state.SensedPoint);
                 monitor.SensedPoint = new double[]
                 {
                 state.SensedPoint.X,

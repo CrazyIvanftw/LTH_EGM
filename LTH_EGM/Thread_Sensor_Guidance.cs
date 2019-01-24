@@ -37,14 +37,15 @@ namespace LTH_EGM
 
             double[] coordinates;
             coordinates = behave.Feedback.Cartesian;
-            double deltaY = 0.0;
-            Debug.WriteLine($"coordinates: {0} \n delta Y: {1}", coordinates, deltaY);
-            if (behave.SensedPoint[1] != 0.0)
-            {
-                deltaY = behave.SensedPoint[1] - oldY;
-                oldY = behave.SensedPoint[1];
-            }
+            double currentY = coordinates[1];
+            double plannedY = behave.Planned.Cartesian[1];
+            double sensedY = behave.SensedPoint[1];
+            double deltaY = oldY - sensedY;
+            double sentY = currentY + deltaY;
+             
+            Debug.WriteLine($"Data: \n robot y: \t{currentY} \n planned y: \t{plannedY} \n sensed y: \t{sensedY} \n old sense y: \t{oldY} \n delta y: \t{deltaY} \n sent y: \t{sentY}");
 
+            oldY = sensedY;
             if (false)
             {
                 pc.SetX(testTarget[0])
@@ -54,9 +55,11 @@ namespace LTH_EGM
             else
             {
                 pc.SetX(coordinates[0])
-                .SetY(coordinates[1] + deltaY)
+                .SetY(sentY)
                 .SetZ(coordinates[2]);
             }
+            
+            
 
             pq.SetU0(1.0)
                 .SetU1(0.0)
@@ -68,7 +71,7 @@ namespace LTH_EGM
 
             planned.SetCartesian(pos);  // bind pos object to planned
             sensor.SetPlanned(planned); // bind planned to sensor object
-
+            Debug.WriteLine($"sent egm message: ({sensor.Planned.Cartesian.Pos.X}, {sensor.Planned.Cartesian.Pos.Y}, {sensor.Planned.Cartesian.Pos.Z})");
             return;
         }
 
@@ -81,21 +84,32 @@ namespace LTH_EGM
             //Debug.WriteLine("--------------------------EGM INBOUND--------------------------");
             //Debug.WriteLine(robot);
             //Debug.WriteLine("--------------------------EGM INBOUND--------------------------");
-
+            Debug.WriteLine($"incoming egm message: ({robot.FeedBack.Cartesian.Pos.X}, {robot.FeedBack.Cartesian.Pos.Y}, {robot.FeedBack.Cartesian.Pos.Z})");
 
             Robot_pose feedback = new Robot_pose();
+            Robot_pose planned = new Robot_pose();
 
             feedback.Cartesian = new double[] {
                 robot.FeedBack.Cartesian.Pos.X,
                 robot.FeedBack.Cartesian.Pos.Y,
                 robot.FeedBack.Cartesian.Pos.Z
             };
-            
 
-            
+            planned.Cartesian = new double[]
+            {
+                robot.Planned.Cartesian.Pos.X,
+                robot.Planned.Cartesian.Pos.Y,
+                robot.Planned.Cartesian.Pos.Z
+            };
+            //Debug.WriteLine($"inbound: ({feedback.Cartesian[0]}, {feedback.Cartesian[1]}, {feedback.Cartesian[2]})");
+            //Debug.WriteLine($"inbound: ({robot.Planned.Cartesian.Pos})");
+
+
+
 
             //behave.TakeMutex(10); //prevent the all race conditions!
             behave.Feedback = feedback;
+            behave.Planned = planned;
             //behave.GiveMutex();
 
             // Create this type of sensor message;
@@ -105,8 +119,8 @@ namespace LTH_EGM
             using (MemoryStream memoryStream = new MemoryStream())
             {
                 EgmSensor sensorMessage = sensor.Build();
-                //Debug.WriteLine("--------------------------EGM.PROTO MESSAGE--------------------------");
-                //Debug.WriteLine(sensorMessage);
+                //Debug.WriteLine("Guide Message:");
+                //Debug.WriteLine(sensor.Planned.Cartesian);
                 //Debug.WriteLine("--------------------------EGM.PROTO MESSAGE--------------------------");
                 sensorMessage.WriteTo(memoryStream);
                 // send the udp message to the robot
