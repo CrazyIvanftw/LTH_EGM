@@ -36,14 +36,17 @@ namespace LTH_EGM
             EgmCartesian.Builder pc = new EgmCartesian.Builder();
 
             double[] coordinates;
+            double offset = 145.0; //the standard offset for the tool poinf of the robot at the radius of the *head* the radius of the sphere is 150mm 
+            behave.TakeMutex(50);
             coordinates = behave.Feedback.Cartesian;
-            double currentY = coordinates[1];
             double plannedY = behave.Planned.Cartesian[1];
-            double sensedY = behave.SensedPoint[1];
-            double deltaY = oldY - sensedY;
-            double sentY = currentY + deltaY;
+            double sensedY = behave.SensedPoint[1] + offset;
+            behave.GiveMutex();
+            double currentY = coordinates[1];
+            double deltaY = sensedY - currentY;
+            double sentY = currentY + deltaY*1.8;
              
-            Debug.WriteLine($"Data: \n robot y: \t{currentY} \n planned y: \t{plannedY} \n sensed y: \t{sensedY} \n old sense y: \t{oldY} \n delta y: \t{deltaY} \n sent y: \t{sentY}");
+            Debug.WriteLine($"Data: \n robot y: \t{currentY} \n planned y: \t{plannedY} \n sensed y + offset: \t{sensedY} \n old sense y: \t{oldY} \n delta y: \t{deltaY} \n sent y: \t{sentY}");
 
             oldY = sensedY;
             if (false)

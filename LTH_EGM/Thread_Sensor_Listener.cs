@@ -27,6 +27,7 @@ namespace LTH_EGM
             if(state.SensorID == 42)
             {
                 Debug.WriteLine(state.SensedPoint);
+                monitor.TakeMutex(50);
                 monitor.SensedPoint = new double[]
                 {
                 state.SensedPoint.X,
@@ -34,6 +35,7 @@ namespace LTH_EGM
                 state.SensedPoint.Z
                 };
                 monitor.SensedPart = state.SensedPart;
+                monitor.GiveMutex();
             }
             
         }
