@@ -49,11 +49,11 @@ namespace LTH_EGM
             Debug.WriteLine($"Data: \n robot y: \t{currentY} \n planned y: \t{plannedY} \n sensed y + offset: \t{sensedY} \n old sense y: \t{oldY} \n delta y: \t{deltaY} \n sent y: \t{sentY}");
 
             oldY = sensedY;
-            if (false)
+            if (true)
             {
-                pc.SetX(testTarget[0])
-                .SetY(testTarget[1])
-                .SetZ(testTarget[2]);
+                pc.SetX(922.868225097656)
+                .SetY(sentY)
+                .SetZ(1407.03857421875);
             }
             else
             {
@@ -127,12 +127,13 @@ namespace LTH_EGM
                 //Debug.WriteLine("--------------------------EGM.PROTO MESSAGE--------------------------");
                 sensorMessage.WriteTo(memoryStream);
                 // send the udp message to the robot
-                int bytesSent = udpServer.Send(memoryStream.ToArray(),
-                    (int)memoryStream.Length, remoteEP);
-                if (bytesSent < 0)
-                {
-                    DebugDisplay("Error send to robot");
-                }
+                var bytesSent = udpServer.SendAsync(memoryStream.ToArray(), (int)memoryStream.Length, remoteEP); //this should send async
+                //int bytesSent = udpServer.Send(memoryStream.ToArray(),(int)memoryStream.Length, remoteEP); //this should send sync
+                // THE DEBUGGING THING IS UNCOMMENTED FOR THE MOMENT
+                //if (bytesSent < 0)
+                //{
+                //    DebugDisplay("Error send to robot");
+                //}
             }
             sensor = null;
         }

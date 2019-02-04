@@ -21,6 +21,8 @@ namespace Test_Ex.cs
             Abstract_Udp_Thread sensorListener = new Thread_Sensor_Listener();
             sensorGuide.StartTryFetch(ds);
             sensorListener.StartTryFetch(ds);
+            //sensorGuide.StartAsyncFetch(ds);
+            //sensorListener.StartAsyncFetch(ds);
             Debug.WriteLine("Please start simulation in RS before continuing");
         }
     }

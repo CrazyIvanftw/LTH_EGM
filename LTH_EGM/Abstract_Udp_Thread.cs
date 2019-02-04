@@ -7,7 +7,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Diagnostics;
 using abb.egm;
-
+using System.Threading.Tasks;
 
 namespace LTH_EGM
 {
@@ -47,15 +47,64 @@ namespace LTH_EGM
             _thread.Start();
         }
 
+
+        /// <summary>
+        /// THIS SHOULD MAKE A NON BLOCKING LISTENER WITHOUT ANY HACKS LIKE I'VE BEEN DOING
+        /// </summary>
+        /// <param name="behavior"></param>
+        public void StartAsyncFetch(Abstract_Data_Structure behavior)
+        {
+            _exitThread = false;
+            _thread = new Thread(() => ThreadStartAsyncFetch(behavior));
+            _thread.Start();
+        }
+
         public void Stop()
         {
             _exitThread = true;
             _thread = null;
         }
 
+        public async void ThreadStartAsyncFetch(Abstract_Data_Structure behavior)
+        {
+            _seqNbr = 0;
+            Debug.WriteLine("async task start");
+            using (var udpClient = new UdpClient(_portNbr))
+            {
+                while (!_exitThread)
+                {
+                    Debug.WriteLine("async task while loop");
+                    byte[] data = null;
+                    IPEndPoint remoteEP = null;
+                    //IPEndPoint object will allow us to read datagrams sent from any source.
+                    var receivedResults = await udpClient.ReceiveAsync();
+                    try
+                    {
+                        Debug.WriteLine("try");
+                        data = receivedResults.Buffer;
+                        remoteEP = receivedResults.RemoteEndPoint;
+                        Debug.WriteLine("end try");
+                    }
+                    catch (Exception e)
+                    {
+                        DebugDisplay(e.Message);
+                        Debug.WriteLine("catch");
+                        Stop();
+                    }
+                    if (data != null && remoteEP != null)
+                    {
+                        Debug.WriteLine("if");
+                        ProcessData(udpClient, remoteEP, data, behavior);
+                    }
+                    Debug.WriteLine("end while");
+                }
+            }
+        }
+
         public void ThreadStartTryFetch(Abstract_Data_Structure behavior)
         {
             _seqNbr = 0;
+            int _sleepTime = 5;
             int timeout = 0;
             UdpClient udpServer = new UdpClient(_portNbr);
             IPEndPoint remoteEP = new IPEndPoint(IPAddress.Any, _portNbr);
@@ -66,6 +115,10 @@ namespace LTH_EGM
                 {
                     if(udpServer.Available > 0)
                     {
+                        if (udpServer.Available > 1)
+                        {
+                            _sleepTime = 0;
+                        }
                         data = udpServer.Receive(ref remoteEP);
                     }
                 }
@@ -83,7 +136,8 @@ namespace LTH_EGM
                 {
                     _exitThread = true;
                 }
-                Thread.Sleep(10);
+                Thread.Sleep(_sleepTime);
+                _sleepTime = 5;
                 timeout++;
             }
         }
