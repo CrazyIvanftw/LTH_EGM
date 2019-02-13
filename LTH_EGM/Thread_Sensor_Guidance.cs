@@ -15,7 +15,7 @@ namespace LTH_EGM
         double[] testTarget = new double[] { 878.795086254, -100.066190776, 1412.499981377 };
         double oldY = 0.0;
 
-        public Thread_Sensor_Guidance() : base((int)Port_Numbers.POS_GUIDE_PORT) { Debug.WriteLine("sensor guide started"); }
+        public Thread_Sensor_Guidance() : base((int)Port_Numbers.POS_GUIDE_PORT) { }
 
         public override void CreateMessage(Abstract_Data_Structure behavior)
         {
@@ -46,7 +46,7 @@ namespace LTH_EGM
             double deltaY = sensedY - currentY;
             double sentY = currentY + deltaY*1.8;
              
-            Debug.WriteLine($"Data: \n robot y: \t{currentY} \n planned y: \t{plannedY} \n sensed y + offset: \t{sensedY} \n old sense y: \t{oldY} \n delta y: \t{deltaY} \n sent y: \t{sentY}");
+            //Debug.WriteLine($"Data: \n robot y: \t{currentY} \n planned y: \t{plannedY} \n sensed y + offset: \t{sensedY} \n old sense y: \t{oldY} \n delta y: \t{deltaY} \n sent y: \t{sentY}");
 
             oldY = sensedY;
             if (true)
@@ -74,7 +74,7 @@ namespace LTH_EGM
 
             planned.SetCartesian(pos);  // bind pos object to planned
             sensor.SetPlanned(planned); // bind planned to sensor object
-            Debug.WriteLine($"sent egm message: ({sensor.Planned.Cartesian.Pos.X}, {sensor.Planned.Cartesian.Pos.Y}, {sensor.Planned.Cartesian.Pos.Z})");
+            //Debug.WriteLine($"sent egm message: ({sensor.Planned.Cartesian.Pos.X}, {sensor.Planned.Cartesian.Pos.Y}, {sensor.Planned.Cartesian.Pos.Z})");
             return;
         }
 
@@ -87,7 +87,7 @@ namespace LTH_EGM
             //Debug.WriteLine("--------------------------EGM INBOUND--------------------------");
             //Debug.WriteLine(robot);
             //Debug.WriteLine("--------------------------EGM INBOUND--------------------------");
-            Debug.WriteLine($"incoming egm message: ({robot.FeedBack.Cartesian.Pos.X}, {robot.FeedBack.Cartesian.Pos.Y}, {robot.FeedBack.Cartesian.Pos.Z})");
+            //Debug.WriteLine($"incoming egm message: ({robot.FeedBack.Cartesian.Pos.X}, {robot.FeedBack.Cartesian.Pos.Y}, {robot.FeedBack.Cartesian.Pos.Z})");
 
             Robot_pose feedback = new Robot_pose();
             Robot_pose planned = new Robot_pose();

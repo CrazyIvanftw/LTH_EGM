@@ -11,7 +11,7 @@ namespace LTH_EGM
     public class Thread_Sensor_Listener : Abstract_Udp_Thread
     {
 
-        public Thread_Sensor_Listener() : base((int)Port_Numbers.TEST_PORT) { Debug.WriteLine("sensor listener started"); }
+        public Thread_Sensor_Listener() : base((int)Port_Numbers.TEST_PORT) { }
 
         public override void CreateMessage(Abstract_Data_Structure behavior)
         {
